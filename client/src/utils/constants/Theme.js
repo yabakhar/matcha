@@ -1,13 +1,16 @@
 export const theme = {
     light: {
         background: {
-            primary: '#fafafa',
-            secondary: '#f5f5f5',
+            primary: '#ffffff',
+            secondary: 'linear-gradient(to bottom right,#DD2476, #F24E1E)',
         },
         colors: {
-            primary: '#00ff00',
-            secondary: '#0f0',
-            tertiary: '#00f',
+            primary: '#F24E1E',
+            secondary: '#DD2476',
+            tertiary: '#2F2E41',
+            title: '#515151',
+            placeholder: '#8A8A8A',
+            text: '#111111',
         },
         fonts: {
             primary: 'Roboto',

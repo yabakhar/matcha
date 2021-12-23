@@ -3,6 +3,7 @@ import GlobalStyle from './globalStyles';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './utils/constants/Theme';
 import MainContent from './views/index';
+import './index.css';
 
 const App = () => {
     const [themeSelector, setThemeSelector] = useState(true);
