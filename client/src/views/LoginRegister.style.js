@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const ContainerStyle = styled.div`
     width: 90%;
     height: 1200px;
-    margin: 50px auto;
+    padding-top: 50px;
+    margin: 0 auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
