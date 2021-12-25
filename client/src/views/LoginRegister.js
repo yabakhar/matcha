@@ -1,16 +1,34 @@
 import { useState } from 'react';
-import { Container } from './LoginRegister.style';
+import {
+    ContainerStyle,
+    LeftSideStyle,
+    FromsStyle,
+    CopyrightStyle,
+} from './LoginRegister.style';
 import Login from '../components/forms/LoginFrom';
 import Register from '../components/forms/RegisterForm';
 import RightSide from '../components/layout/RightSide';
+import { ReactComponent as Logo } from '../assets/Logo.svg';
 
 const Home = () => {
     const [log, setLog] = useState(true);
     return (
-        <Container>
-            {log ? <Login setLog={setLog} /> : <Register setLog={setLog} />}
+        <ContainerStyle>
+            <LeftSideStyle>
+                <Logo />
+                <FromsStyle>
+                    {log ? (
+                        <Login setLog={setLog} />
+                    ) : (
+                        <Register setLog={setLog} />
+                    )}
+                </FromsStyle>
+                <CopyrightStyle>
+                    © 2021 Matcha All Rights Reserved
+                </CopyrightStyle>
+            </LeftSideStyle>
             <RightSide />
-        </Container>
+        </ContainerStyle>
     );
 };
 export default Home;

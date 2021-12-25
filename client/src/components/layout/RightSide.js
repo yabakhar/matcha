@@ -27,14 +27,14 @@ const RightSide = () => {
                         <RightQuote />
                     </div>
                 </div>
-                <div className="swiper-container">
+                {/* <div className="swiper-container">
                     <div className="svgs"></div>
                     <div className="swipers">
                         <div className="cercle"></div>
                         <div className="cercle"></div>
                         <div className="cercle active"></div>
                     </div>
-                </div>
+                </div> */}
             </Content>
         </RightSideStyle>
     );

@@ -4,6 +4,7 @@ export const RightSideStyle = styled.div`
     width: 50%;
     height: 100%;
     position: relative;
+    border-radius: 20px;
     background: ${(props) => props.theme.background.secondary};
     &::before {
         content: '';
@@ -15,6 +16,7 @@ export const RightSideStyle = styled.div`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        border-radius: 20px;
         z-index: 50;
     }
     &::after {
