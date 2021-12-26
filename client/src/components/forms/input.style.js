@@ -2,7 +2,6 @@ import styled from 'styled-components';
 export const FormGroupStyle = styled.div`
     height: 80px;
     position: relative;
-    padding: 15px 0 0;
     margin-top: 10px;
     width: 50%;
 `;

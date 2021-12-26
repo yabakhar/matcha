@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 export const RightSideStyle = styled.div`
-    /* flex: 0 0 50%; */
-    width: 50%;
+    flex: 1 1 50%;
     height: 100%;
     position: relative;
     border-radius: 20px;
     background: ${(props) => props.theme.background.secondary};
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &::before {
         content: '';
         position: absolute;
@@ -50,16 +52,13 @@ export const EllipseLarge = styled.div`
     position: absolute;
     top: 5%;
     right: 5%;
-    background: ${(props) => props.theme.colors.primary};
+    /* background: rgba(255, 255, 255, 0.8); */
+    background: ${(props) => props.theme.colors.secondary};
 `;
 
 export const Content = styled.div`
-    position: absolute;
-    width: 80%;
+    flex: 0 0 80%;
     height: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-flow: column nowrap;
     padding: 2rem;
@@ -68,38 +67,47 @@ export const Content = styled.div`
         width: 100%;
         flex: 0 0 50%;
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column nowrap;
         justify-content: space-around;
         .text {
+            height: 70%;
             padding: 1rem;
-            margin-top: 1.5rem;
+            /* margin-top: 1.5rem; */
             display: flex;
-            flex-flow: column wrap;
+            flex-flow: column nowrap;
             color: rgba(255, 255, 255, 0.8);
-            font_size: 1.5rem;
+            font-size: 1.2rem;
+            p {
+                flex: 0 0 80%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+            }
             strong {
+                font-size: 1.2rem;
                 display: flex;
                 justify-content: flex-end;
-                color: ${(props) => props.theme.colors.tertiary};
+                color: rgba(255, 255, 255, 0.9);
+                font-weight: bold;
             }
         }
         .icone-quote {
             width: 100%;
+            height: 10%;
             position: relative;
             svg {
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 80px;
+                width: 40px;
+                height: 40px;
                 & > * {
-                    fill: ${(props) => props.theme.colors.tertiary};
-                    width: 100%;
+                    fill: rgba(255, 255, 255, 0.8);
                 }
             }
             &:nth-child(3) {
                 svg {
                     left: 90%;
-                    top: -80%;
                 }
             }
         }

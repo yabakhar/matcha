@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
   }
   input[type='submit'] {
-        margin-top: 2rem;
+        margin-top: 1rem;
         width: 50%;
         height: 60px;
         border: none;

@@ -1,10 +1,10 @@
-import { LoginFormStyle, HelpersStyle, FooterStyle } from './LoginForm.style';
 import {
-    FormGroupStyle,
-    FormFieldStyle,
-    FormLabelStyle,
-    FormStyle,
-} from './input.style';
+    LoginFormStyle,
+    HelpersStyle,
+    FooterStyle,
+    LoginStyle,
+} from './LoginForm.style';
+import { FormGroupStyle, FormFieldStyle, FormLabelStyle } from './input.style';
 import useForm from '../../Hooks/useForm';
 import { ReactComponent as Google } from '../../assets/icons/Google.svg';
 
@@ -13,15 +13,13 @@ const Login = (props) => {
         console.log('Callback function when form is submitted!');
         console.log('Form Values ', values);
     };
-
-    //Custom hook call
     const { handleChange, values, errors, handleSubmit } = useForm(formLogin);
     return (
         <LoginFormStyle>
             <h1>
                 <span> Welcome back! </span>Please login to your account.
             </h1>
-            <FormStyle onSubmit={handleSubmit}>
+            <LoginStyle onSubmit={handleSubmit}>
                 <FormGroupStyle>
                     <FormFieldStyle
                         type="email"
@@ -44,7 +42,7 @@ const Login = (props) => {
                     {/* {errors.password && <h3>{errors.password}</h3>} */}
                 </FormGroupStyle>
                 <input type="submit" value="Login" className="submit" />
-            </FormStyle>
+            </LoginStyle>
             <HelpersStyle>
                 <p>
                     Don't have account ?{' '}
