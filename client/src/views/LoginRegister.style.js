@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const ContainerStyle = styled.div`
     width: 90%;
-    height: 1200px;
-    padding-top: 50px;
+    max-width: 1800px;
+    height: 1100px;
+    padding-top: 40px;
     margin: 0 auto;
     display: flex;
     flex-flow: row wrap;

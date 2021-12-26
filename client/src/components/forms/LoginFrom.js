@@ -1,9 +1,10 @@
+import { LoginFormStyle, HelpersStyle, FooterStyle } from './LoginForm.style';
 import {
-    LoginFromStyle,
+    FormGroupStyle,
+    FormFieldStyle,
+    FormLabelStyle,
     FormStyle,
-    HelpersStyle,
-    FooterStyle,
-} from './LoginForm.style';
+} from './input.style';
 import useForm from '../../Hooks/useForm';
 import { ReactComponent as Google } from '../../assets/icons/Google.svg';
 
@@ -16,41 +17,45 @@ const Login = (props) => {
     //Custom hook call
     const { handleChange, values, errors, handleSubmit } = useForm(formLogin);
     return (
-        <LoginFromStyle>
+        <LoginFormStyle>
             <h1>
                 <span> Welcome back! </span>Please login to your account.
             </h1>
             <FormStyle onSubmit={handleSubmit}>
-                <div className="form__group">
-                    <input
-                        className="form__field"
+                <FormGroupStyle>
+                    <FormFieldStyle
                         type="email"
                         name="email"
                         placeholder="Email Address or User Name"
                         onChange={handleChange}
                     />
-                    <label className="form__label">
-                        Email Address or User Name
-                    </label>
+                    <FormLabelStyle>Email Address or User Name</FormLabelStyle>
                     {/* {errors.email && <h3>{errors.email}</h3>} */}
-                </div>
-                <div className="form__group">
-                    <input
-                        className="form__field"
+                </FormGroupStyle>
+                <FormGroupStyle>
+                    <FormFieldStyle
                         minLength="8"
                         type="password"
                         name="password"
                         placeholder="Password"
                         onChange={handleChange}
                     />
-                    <label className="form__label">Password</label>
+                    <FormLabelStyle>Password</FormLabelStyle>
                     {/* {errors.password && <h3>{errors.password}</h3>} */}
-                </div>
+                </FormGroupStyle>
                 <input type="submit" value="Login" className="submit" />
             </FormStyle>
             <HelpersStyle>
                 <p>
-                    Don't have account ? <span className="signup">Sign Up</span>
+                    Don't have account ?{' '}
+                    <span
+                        onClick={() => {
+                            props.setLog(false);
+                        }}
+                        className="signup"
+                    >
+                        Sign Up
+                    </span>
                 </p>
                 <p className="forgot">Forgot Password?</p>
             </HelpersStyle>
@@ -68,7 +73,7 @@ const Login = (props) => {
                     <p>Google</p>
                 </div>
             </FooterStyle>
-        </LoginFromStyle>
+        </LoginFormStyle>
     );
 };
 

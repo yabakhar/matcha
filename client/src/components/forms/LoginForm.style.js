@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-export const LoginFromStyle = styled.div`
+export const LoginFormStyle = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    /* justify-content: space-between; */
     padding: 2rem;
     h1 {
         width: 100%;
@@ -18,100 +17,6 @@ export const LoginFromStyle = styled.div`
         display: flex;
         flex-flow: column wrap;
         text-align: center;
-    }
-`;
-
-export const FormStyle = styled.form`
-    width: 100%;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    input[type='submit'] {
-        margin-top: 2rem;
-        width: 50%;
-        height: 60px;
-        border: none;
-        border-radius: 10px;
-        background-image: linear-gradient(
-            to right,
-            ${(props) => props.theme.colors.primary},
-            ${(props) => props.theme.colors.secondary}
-        );
-        font-size: 1.3rem;
-        color: white;
-    }
-    .form__group {
-        height: 80px;
-        position: relative;
-        padding: 15px 0 0;
-        margin-top: 10px;
-        width: 50%;
-    }
-    .form__field {
-        width: 100%;
-        border: 0;
-        border-bottom: 1px solid ${(props) => props.theme.colors.placeholder};
-        outline: 0;
-        font-size: 1.2rem;
-        color: ${(props) => props.theme.colors.text};
-        padding: 20px 0;
-        background: transparent;
-        transition: border-color 0.2s;
-
-        &::placeholder {
-            color: transparent;
-        }
-
-        &:placeholder-shown ~ .form__label {
-            font-size: 1rem;
-            cursor: text;
-            top: 20px;
-        }
-    }
-
-    .form__label {
-        position: absolute;
-        top: 0;
-        display: block;
-        transition: 0.2s;
-        font-size: 1rem;
-        color: ${(props) => props.theme.colors.placeholder};
-    }
-
-    .form__field:focus {
-        ~ .form__label {
-            position: absolute;
-            top: 0;
-            display: block;
-            transition: 0.2s;
-            font-size: 1rem;
-            background-image: linear-gradient(
-                45deg,
-                ${(props) => props.theme.colors.primary},
-                ${(props) => props.theme.colors.secondary}
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            -moz-background-clip: text;
-            -moz-text-fill-color: transparent;
-            font-weight: 400;
-        }
-        padding-bottom: 6px;
-        font-weight: 400;
-        border-width: 3px;
-        border-image: linear-gradient(
-            to right,
-            ${(props) => props.theme.colors.primary},
-            ${(props) => props.theme.colors.secondary}
-        );
-        border-image-slice: 1;
-    }
-    /* reset input */
-    .form__field {
-        &:required,
-        &:invalid {
-            box-shadow: none;
-        }
     }
 `;
 
@@ -129,6 +34,7 @@ export const HelpersStyle = styled.div`
         font-weight: 400;
         span {
             color: ${(props) => props.theme.colors.primary};
+            cursor: pointer;
         }
     }
 `;

@@ -1,11 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-// import styled from 'styled-components';
-
-// export const CenterStyle = styled.div`
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// `;
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -21,5 +14,19 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100vh;
   }
+  input[type='submit'] {
+        margin-top: 2rem;
+        width: 50%;
+        height: 60px;
+        border: none;
+        border-radius: 10px;
+        background-image: linear-gradient(
+            to right,
+            ${(props) => props.theme.colors.primary},
+            ${(props) => props.theme.colors.secondary}
+        );
+        font-size: 1.3rem;
+        color: white;
+    }
 `;
 export default GlobalStyle;
