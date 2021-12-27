@@ -8,6 +8,14 @@ export const RightSideStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    .SliderContainer {
+        flex: 0 0 80%;
+        height: 80%;
+        position: relative;
+        .active-anim {
+            opacity: 1;
+        }
+    }
     &::before {
         content: '';
         position: absolute;
@@ -52,13 +60,16 @@ export const EllipseLarge = styled.div`
     position: absolute;
     top: 5%;
     right: 5%;
-    /* background: rgba(255, 255, 255, 0.8); */
-    background: ${(props) => props.theme.colors.secondary};
+    background: rgba(255, 255, 255, 0.2);
 `;
 
 export const Content = styled.div`
-    flex: 0 0 80%;
-    height: 80%;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
     display: flex;
     flex-flow: column nowrap;
     padding: 2rem;
@@ -72,7 +83,6 @@ export const Content = styled.div`
         .text {
             height: 70%;
             padding: 1rem;
-            /* margin-top: 1.5rem; */
             display: flex;
             flex-flow: column nowrap;
             color: rgba(255, 255, 255, 0.8);
@@ -112,24 +122,20 @@ export const Content = styled.div`
             }
         }
     }
-    .swiper-container {
-        .swipers {
-            display: flex;
-            width: 100px;
-            justify-content: space-between;
-            .cercle {
-                width: 20px;
-                height: 20px;
-                background-color: #f7f7f7;
-                opacity: 0.8;
-                border-radius: 50%;
-            }
-            .active {
-                opacity: 1;
-                width: 50px;
-                background-color: #f7f7f7;
-                border-radius: 16px;
-            }
+    .image {
+        width: 100%;
+        flex: 0 0 50%;
+        display: flex;
+        flex-flow: column nowrap;
+        position: relative;
+        z-index: 100;
+        svg {
+            opacity: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     }
 `;
