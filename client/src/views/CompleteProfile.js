@@ -6,6 +6,9 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Content  from "./ContentCompleteProfile";
+import {
+  ContainerStyle
+} from './CompleteProfile.style';
 
 const steps = [
   "Select campaign settings",
@@ -25,9 +28,8 @@ export default function HorizontalLinearStepper() {
   };   
 
   return (
-    <Box sx={{ width: "50%" ,height : "50%",justifyContent:"center",alignItems :"center"}}>
-    
-      <Stepper activeStep={activeStep}>
+  <div style={{display : 'flex', alignItems : 'center', justifyContent : 'space-evenly', width : '100%', flexDirection : 'column', height : '100%'}}>
+      <Stepper activeStep={activeStep} style={{width : '70%'}}>
         {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
@@ -46,8 +48,10 @@ export default function HorizontalLinearStepper() {
         </React.Fragment>
       ) : (
         <React.Fragment>
+          <ContainerStyle>
           <Content stepContent={activeStep}/>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          </ContainerStyle>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2, width : '70%' }}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
@@ -60,10 +64,11 @@ export default function HorizontalLinearStepper() {
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
+
           </Box>
         </React.Fragment>
       )}
-    </Box>
+  </div>
   );
 }
 
