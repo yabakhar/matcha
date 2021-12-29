@@ -35,7 +35,9 @@ const StepThree =() => {
     return (
           <div >
            <input accept="image/*"  id="icon-button-file" type="file" onChange={changepic} value={InputValue} disabled={photos.length > 3} />
-           <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={150}>
+           {
+           photos.length < 1 ? "" :
+            <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={150}>
             {photos?.map((item, index) => (
               <div key={index}>
               <ImageListItem >
@@ -51,6 +53,7 @@ const StepThree =() => {
              </div>
             ))}
            </ImageList>
+            }
           </div>
     )
   }

@@ -4,7 +4,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import Swal from 'sweetalert2'
 import Content  from "./ContentCompleteProfile";
 import {
   ContainerStyle
@@ -42,9 +42,7 @@ export default function HorizontalLinearStepper() {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+           {Swal.fire({  icon: 'success',title: 'Your work has been saved',text: 'Something went wrong!'})}
         </React.Fragment>
       ) : (
         <React.Fragment>
