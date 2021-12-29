@@ -3,7 +3,7 @@ import StepTwo from './Steps/StepTwo';
 import StepThree from './Steps/StepThree';
 function Content({stepContent}) {
     return (
-      <div>
+      <div> 
         { 
           (stepContent === 0) ? 
           <StepOne/>

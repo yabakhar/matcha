@@ -3,8 +3,12 @@ import Avatar from '@mui/material/Avatar';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import DatePicker from '@mui/lab/DatePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 const StepOne =() => {
+    const [date, setDate] = useState('1997-01-01')
     const [state, setstate] = useState("")
       const changepic = (e) => {
         let file = e.target.files[0]
@@ -31,6 +35,14 @@ const StepOne =() => {
         <TextField label={"User Name"} />
         <TextField label={"First Name"}/>
         <TextField label={"Last Name"} />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+         <DatePicker
+            label="Birthday"
+            value={date}
+            onChange={(newValue) => {
+                setDate(newValue);
+            }}renderInput={(params) => <TextField {...params} />}/>
+            </LocalizationProvider>
         </form>
         </Grid>
         </Grid>
