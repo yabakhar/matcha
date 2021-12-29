@@ -15,8 +15,10 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
   }
   input[type='submit'] {
-        margin-top: 2rem;
-        width: 50%;
+        margin-top: 1rem;
+        width: 70%;
+        min-width: 250px;
+        max-width: 450px;
         height: 60px;
         border: none;
         border-radius: 10px;
@@ -27,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
         );
         font-size: 1.3rem;
         color: white;
+        @media (max-width: 1000px) {
+        max-width: 450px;
+        width: 100% !important;
+    }
     }
 `;
 export default GlobalStyle;

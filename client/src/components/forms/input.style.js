@@ -1,10 +1,31 @@
 import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
+
+export const TextFieldStyled = styled(TextField)({
+    '& label.Mui-focused': {
+        color: '#DD2476',
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: '#8A8A8A',
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: '#8A8A8A',
+        },
+        '&:hover fieldset': {
+            borderColor: '#8A8A8A',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: '#DD2476',
+        },
+    },
+});
 export const FormGroupStyle = styled.div`
     height: 80px;
     position: relative;
-    padding: 15px 0 0;
     margin-top: 10px;
     width: 50%;
+    min-width: 250px;
 `;
 
 export const FormFieldStyle = styled.input`
@@ -12,9 +33,10 @@ export const FormFieldStyle = styled.input`
     border: 0;
     border-bottom: 1px solid ${(props) => props.theme.colors.placeholder};
     outline: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: ${(props) => props.theme.colors.text};
     padding: 20px 0px;
+    margin-top: 10px;
     padding-left: 10px;
     background: transparent;
     transition: border-color 0.2s;
@@ -29,6 +51,7 @@ export const FormFieldStyle = styled.input`
         top: 20px;
     }
     &:focus {
+        /* font-size: 1rem; */
         ~ label {
             position: absolute;
             top: 0;
@@ -45,6 +68,7 @@ export const FormFieldStyle = styled.input`
             -moz-background-clip: text;
             -moz-text-fill-color: transparent;
             font-weight: 400;
+            padding-bottom: 20px;
         }
         padding-bottom: 6px;
         font-weight: 400;
