@@ -12,7 +12,7 @@ function Content({stepContent}) {
           : 
           <StepThree/>
         } 
-    </div>
+      </div>
     )
 }
 

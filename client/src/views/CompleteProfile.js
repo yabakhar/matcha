@@ -4,7 +4,6 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Swal from 'sweetalert2'
 import Content  from "./ContentCompleteProfile";
 import {
   ContainerStyle
@@ -15,9 +14,15 @@ const steps = [
   "Create an ad group",
   "Create an ad"
 ];
-
+export const userContext = React.createContext();
 export default function HorizontalLinearStepper() {
-  // const [stepContent, setStepContent] = React.useState(0);
+
+  const [userData, setUserData] = React.useState({
+    fname: "",
+    lname: "",
+    galery: []
+    
+  })
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -42,12 +47,19 @@ export default function HorizontalLinearStepper() {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-           {Swal.fire({  icon: 'success',title: 'Your work has been saved',text: 'Something went wrong!'})}
+           {console.log(userData)}
         </React.Fragment>
       ) : (
         <React.Fragment>
           <ContainerStyle>
-          <Content stepContent={activeStep}/>
+
+          <userContext.Provider value={{
+              userData,
+              setUserData
+          }}>
+            <Content stepContent={activeStep}/>
+          </userContext.Provider>
+
           </ContainerStyle>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2, width : '70%' }}>
             <Button
@@ -62,7 +74,6 @@ export default function HorizontalLinearStepper() {
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
-
           </Box>
         </React.Fragment>
       )}

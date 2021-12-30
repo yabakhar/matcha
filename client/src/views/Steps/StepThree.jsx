@@ -1,18 +1,25 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Delete from '../../assets/icons/delete.png'
 import Swal from 'sweetalert2'
 import styled  from 'styled-components';
+import { userContext } from "../CompleteProfile";
 const StepThree =() => {
-  const [photos, Setphotos] = useState([])
+  const {
+    userData,
+    setUserData
+  } = useContext(userContext);
   const [InputValue, setInputValue] = useState("")
-  
   function DeleteImage(index) {
-     Setphotos(photos.filter((item, i) => i !== index))
+    setUserData(initialValue => {
+      const finalValue = {...initialValue}
+      finalValue.galery = [...finalValue.galery.filter((item, i) => i !== index)]
+      return finalValue;
+    })
   }
   const changepic = (e) => {
-    if (photos.length > 3)
+    if (userData.galery.length > 3)
     {
         Swal.fire({
           icon: 'error',
@@ -26,19 +33,32 @@ const StepThree =() => {
       let reader = new FileReader()
       reader.readAsDataURL(file);
       reader.onloadend = function (e) {
-        Setphotos(
-         [...photos,e.currentTarget.result])
+        if (e.currentTarget.result.match('image.*'))
+        {
+          setUserData(initialValue => {
+            const finalValue = {...initialValue}
+            finalValue.galery = [...finalValue.galery, e.currentTarget.result]
+            return finalValue;
+          })
+        }
+        else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+          })
+        }
        }
        setInputValue("")
     }
     }
     return (
           <div >
-           <input accept="image/*"  id="icon-button-file" type="file" onChange={changepic} value={InputValue} disabled={photos.length > 3} />
+           <input accept="image/*" name="uploadgalerry" type="file" onChange={changepic} value={InputValue} disabled={userData.galery.length > 3} />
            {
-           photos.length < 1 ? "" :
+           userData.galery.length < 1 ? "" :
             <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={150}>
-            {photos?.map((item, index) => (
+            {userData.galery?.map((item, index) => (
               <div key={index}>
               <ImageListItem >
               <Image src={Delete} alt="delete" onClick={() => DeleteImage(index)}/>
@@ -59,9 +79,10 @@ const StepThree =() => {
   }
 export default StepThree
 
-export const Image = styled.img`
+const Image = styled.img`
   width : 15px;
   height : 15px;
-  position : absolute;
   cursor : pointer;
+  position : absolute;
+  float:right;
 `
