@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <ContainerStyle>
             <LeftSideStyle>
-                <Logo />
+                <Logo className="logo" />
                 <FromsStyle>
                     {log ? (
                         <Login setLog={setLog} />

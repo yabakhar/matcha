@@ -8,7 +8,3 @@
     font-family: 'Shizuru';
     src: url('./assets/fonts/Shizuru/Shizuru-Regular.ttf') format('truetype');
 }
-
-#root {
-    height : 100%
-}
