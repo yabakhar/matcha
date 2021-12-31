@@ -1,11 +1,11 @@
 import { RegisterFormStyle, SwitchToLogin } from './RegisterForm.style';
-import {
-    FormGroupStyle,
-    FormFieldStyle,
-    FormLabelStyle,
-    FormStyle,
-} from './input.style';
+import { FormStyle, TextFieldStyled } from './input.style';
 import useForm from '../../Hooks/useForm';
+import { useState } from 'react';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 
 const Register = (props) => {
     const formLogin = () => {
@@ -13,54 +13,79 @@ const Register = (props) => {
         console.log('Form Values ', values);
     };
     const { handleChange, values, errors, handleSubmit } = useForm(formLogin);
-
+    const [showPassword, setShowPassword] = useState(false);
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     //Custom hook call
     return (
         <RegisterFormStyle>
-            <h1>Welcome !</h1>
-            <FormStyle onSubmit={handleSubmit}>
-                <FormGroupStyle>
-                    <FormFieldStyle
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        onChange={handleChange}
-                    />
-                    <FormLabelStyle>User Name</FormLabelStyle>
-                    {/* {errors.email && <h3>{errors.email}</h3>} */}
-                </FormGroupStyle>
-                <FormGroupStyle>
-                    <FormFieldStyle
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        onChange={handleChange}
-                    />
-                    <FormLabelStyle>Email Address or User Name</FormLabelStyle>
-                    {/* {errors.email && <h3>{errors.email}</h3>} */}
-                </FormGroupStyle>
-                <FormGroupStyle>
-                    <FormFieldStyle
-                        minLength="8"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={handleChange}
-                    />
-                    <FormLabelStyle>Password</FormLabelStyle>
-                    {/* {errors.password && <h3>{errors.password}</h3>} */}
-                </FormGroupStyle>
-                <FormGroupStyle>
-                    <FormFieldStyle
-                        minLength="8"
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={handleChange}
-                    />
-                    <FormLabelStyle>Comfirm Password</FormLabelStyle>
-                    {/* {errors.password && <h3>{errors.password}</h3>} */}
-                </FormGroupStyle>
+            <div className="header-register">
+                <h1>Welcome !</h1>
+            </div>
+            <FormStyle className="form-register" onSubmit={handleSubmit}>
+                <TextFieldStyled
+                    className="input-register"
+                    label="User Name"
+                    variant="outlined"
+                />
+                <TextFieldStyled
+                    className="input-register"
+                    label="Email Address"
+                    variant="outlined"
+                />
+                <TextFieldStyled
+                    className="input-register"
+                    label="Password"
+                    variant="outlined"
+                    type={showPassword ? 'text' : 'password'}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+                <TextFieldStyled
+                    className="input-register"
+                    label="Confirm Password"
+                    variant="outlined"
+                    type={showPassword ? 'text' : 'password'}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="start">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() =>
+                                        setShowPassword(!showPassword)
+                                    }
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
                 <input type="submit" value="Register" className="submit" />
             </FormStyle>
             <SwitchToLogin

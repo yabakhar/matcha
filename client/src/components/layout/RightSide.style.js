@@ -2,6 +2,8 @@ import styled from 'styled-components';
 export const RightSideStyle = styled.div`
     flex: 1 1 50%;
     height: 100%;
+    max-height: 1200px;
+    min-height: 1000px;
     position: relative;
     border-radius: 20px;
     background: ${(props) => props.theme.background.secondary};
@@ -50,6 +52,9 @@ export const RightSideStyle = styled.div`
         opacity: 0.8;
     }
     overflow: hidden;
+    @media (max-width: 1100px) {
+        display: none !important;
+    }
 `;
 
 export const EllipseLarge = styled.div`

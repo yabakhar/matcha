@@ -4,17 +4,25 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Content  from "./ContentCompleteProfile";
+import {
+  ContainerStyle
+} from './CompleteProfile.style';
 
 const steps = [
   "Select campaign settings",
   "Create an ad group",
   "Create an ad"
 ];
-
+export const userContext = React.createContext();
 export default function HorizontalLinearStepper() {
-  // const [stepContent, setStepContent] = React.useState(0);
+
+  const [userData, setUserData] = React.useState({
+    fname: "",
+    lname: "",
+    galery: []
+    
+  })
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -25,9 +33,8 @@ export default function HorizontalLinearStepper() {
   };   
 
   return (
-    <Box sx={{ width: "50%" ,height : "50%",justifyContent:"center",alignItems :"center"}}>
-    
-      <Stepper activeStep={activeStep}>
+  <div style={{display : 'flex', alignItems : 'center', justifyContent : 'space-evenly', width : '100%', flexDirection : 'column', height : '100%'}}>
+      <Stepper activeStep={activeStep} style={{width : '70%'}}>
         {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
@@ -40,14 +47,21 @@ export default function HorizontalLinearStepper() {
       </Stepper>
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
+           {console.log(userData)}
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Content stepContent={activeStep}/>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+          <ContainerStyle>
+
+          <userContext.Provider value={{
+              userData,
+              setUserData
+          }}>
+            <Content stepContent={activeStep}/>
+          </userContext.Provider>
+
+          </ContainerStyle>
+          <Box sx={{ display: "flex", flexDirection: "row", pt: 2, width : '70%' }}>
             <Button
               color="inherit"
               disabled={activeStep === 0}
@@ -63,7 +77,7 @@ export default function HorizontalLinearStepper() {
           </Box>
         </React.Fragment>
       )}
-    </Box>
+  </div>
   );
 }
 

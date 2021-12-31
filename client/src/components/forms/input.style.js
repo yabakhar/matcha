@@ -1,9 +1,31 @@
 import styled from 'styled-components';
+import TextField from '@mui/material/TextField';
+
+export const TextFieldStyled = styled(TextField)({
+    '& label.Mui-focused': {
+        color: '#DD2476',
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: '#8A8A8A',
+    },
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderColor: '#8A8A8A',
+        },
+        '&:hover fieldset': {
+            borderColor: '#8A8A8A',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: '#DD2476',
+        },
+    },
+});
 export const FormGroupStyle = styled.div`
     height: 80px;
     position: relative;
     margin-top: 10px;
     width: 50%;
+    min-width: 250px;
 `;
 
 export const FormFieldStyle = styled.input`

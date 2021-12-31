@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../../views/LoginRegister';
-import HorizontalLinearStepper from '../../views/CompleteProfile.js';
 import { NotFound } from './NotFound';
 
 const Router = () => {
@@ -9,7 +8,6 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
-                <Route path="/profile" element={<HorizontalLinearStepper />} />
             </Routes>
         </BrowserRouter>
     );

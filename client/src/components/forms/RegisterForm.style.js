@@ -5,16 +5,36 @@ export const RegisterFormStyle = styled.div`
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    justify-content: space-around;
     padding: 2rem;
-    h1 {
+    .header-register {
+        flex: 0 0 10%;
         width: 100%;
-        color: ${(props) => props.theme.colors.title};
-        font-whieght: lighter;
-        font-size: 1.5rem;
-        letter-spacing: 0.1rem;
-        height: 100px;
-        line-height: 140%;
-        text-align: center;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        h1 {
+            color: ${(props) => props.theme.colors.title};
+            font-weight: lighter;
+            font-size: 1.5rem;
+            letter-spacing: 0.1rem;
+            line-height: 140%;
+            text-align: center;
+        }
+    }
+    .input-register {
+        width: 70%;
+        min-width: 250px;
+        margin: 1rem;
+        max-width: 450px;
+    }
+    input[type='submit'] {
+        /* margin-top: 3rem; */
+    }
+    .form-register {
+        flex: 0 0 60%;
+        display: flex;
+        justify-content: space-around;
     }
 `;
 

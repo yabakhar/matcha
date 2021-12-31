@@ -19,6 +19,7 @@ const Slider = () => {
             {dataSlider.map((item, index) => {
                 return (
                     <Content
+                        key={index}
                         className={
                             slideIndex === index ? 'slide active-anim' : 'slide'
                         }
