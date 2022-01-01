@@ -2,8 +2,10 @@ import styled from 'styled-components';
 export const RightSideStyle = styled.div`
     flex: 1 1 50%;
     height: 100%;
-    max-height: 1200px;
-    min-height: 1000px;
+    max-height: 1000px;
+    min-height: 800px;
+    /* max-height: 1200px; */
+    /* min-height: 1000px; */
     position: relative;
     border-radius: 20px;
     background: ${(props) => props.theme.background.secondary};
