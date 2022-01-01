@@ -3,16 +3,22 @@ import GlobalStyle from './globalStyles';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './utils/constants/Theme';
 import MainContent from './views/index';
+import { Provider } from 'react-redux';
+import configureStore from './store/index';
 import './index.css';
+
+const store = configureStore();
 
 const App = () => {
     const [themeSelector, setThemeSelector] = useState(true);
     return (
         <>
-            <ThemeProvider theme={themeSelector ? theme.light : theme.dark}>
-                <GlobalStyle />
-                <MainContent />
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider theme={themeSelector ? theme.light : theme.dark}>
+                    <GlobalStyle />
+                    <MainContent />
+                </ThemeProvider>
+            </Provider>
         </>
     );
 };
