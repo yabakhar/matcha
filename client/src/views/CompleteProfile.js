@@ -1,4 +1,4 @@
-import * as React from "react";
+import React,{Fragment,useState} from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -16,14 +16,13 @@ const steps = [
 ];
 export const userContext = React.createContext();
 export default function HorizontalLinearStepper() {
-
-  const [userData, setUserData] = React.useState({
+  const [userData, setUserData] = useState({
     fname: "",
     lname: "",
     galery: []
     
   })
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -46,13 +45,12 @@ export default function HorizontalLinearStepper() {
         })}
       </Stepper>
       {activeStep === steps.length ? (
-        <React.Fragment>
+        <Fragment>
            {console.log(userData)}
-        </React.Fragment>
+        </Fragment>
       ) : (
-        <React.Fragment>
+        <Fragment>
           <ContainerStyle>
-
           <userContext.Provider value={{
               userData,
               setUserData
@@ -75,7 +73,7 @@ export default function HorizontalLinearStepper() {
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
           </Box>
-        </React.Fragment>
+        </Fragment>
       )}
   </div>
   );
