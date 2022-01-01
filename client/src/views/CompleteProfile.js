@@ -33,7 +33,7 @@ export default function HorizontalLinearStepper() {
 
   return (
   <div style={{display : 'flex', alignItems : 'center', justifyContent : 'space-evenly', width : '100%', flexDirection : 'column', height : '100%'}}>
-      <Stepper activeStep={activeStep} style={{width : '70%'}}>
+      <Stepper activeStep={activeStep}  style={{width : '90%'}}>
         {steps.map((label, index) => {
             const stepProps = {};
             const labelProps = {};
@@ -45,11 +45,12 @@ export default function HorizontalLinearStepper() {
         })}
       </Stepper>
       {activeStep === steps.length ? (
-        <Fragment>
+        <>
            {console.log(userData)}
-        </Fragment>
+            Hello world!
+        </>
       ) : (
-        <Fragment>
+        <>
           <ContainerStyle>
           <userContext.Provider value={{
               userData,
@@ -57,7 +58,6 @@ export default function HorizontalLinearStepper() {
           }}>
             <Content stepContent={activeStep}/>
           </userContext.Provider>
-
           </ContainerStyle>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2, width : '70%' }}>
             <Button
@@ -73,7 +73,7 @@ export default function HorizontalLinearStepper() {
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
           </Box>
-        </Fragment>
+        </>
       )}
   </div>
   );

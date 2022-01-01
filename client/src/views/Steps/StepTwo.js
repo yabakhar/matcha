@@ -25,8 +25,8 @@ const StepTwo =() => {
     
 
     return (
-      <Box sx={{ flexGrow: 0 }} sm={2} md={2} alignItems="center">
-      <FormControl component="fieldset" style={{display : 'flex', flexDirection : 'row'}}>
+      <Box sm={1} md={2} alignItems="center">
+      <FormControl component="fieldset" style={{display : 'flex', flexDirection : 'row'}} md={{display : 'flex', flexDirection : 'column'}}>
         <div>
         <FormLabel component="legend">Gender</FormLabel>
         <RadioGroup  aria-label="gender" name="yourGender" onChange={updatename}>

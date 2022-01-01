@@ -4,7 +4,9 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Delete from '../../assets/icons/delete.png'
 import Swal from 'sweetalert2'
 import styled  from 'styled-components';
+import Box from '@mui/material/Box';
 import { userContext } from "../CompleteProfile";
+import { min } from 'date-fns';
 const StepThree =() => {
   const {
     userData,
@@ -53,11 +55,11 @@ const StepThree =() => {
     }
     }
     return (
-          <div >
-           <input accept="image/*" name="uploadgalerry" type="file" onChange={changepic} value={InputValue} disabled={userData.galery.length > 3} />
-           {
+      <Box alignItems="center" display="flex" flexWrap="wrap"  alignContent="center" background="red" justifyContent="center">
+          
+           <div>{
            userData.galery.length < 1 ? "" :
-            <ImageList sx={{ width: 500, height: 450 }} cols={3} rowHeight={150}>
+            <ImageList>
             {userData.galery?.map((item, index) => (
               <div key={index}>
               <ImageListItem >
@@ -67,14 +69,17 @@ const StepThree =() => {
                   src={item}
                   alt={item}
                   loading="lazy"
-                  style={{width : '150px', height : '150px'}}
+                  style={{width :"15vh" ,height : "15vh"}}
                 />
               </ImageListItem>
              </div>
             ))}
            </ImageList>
-            }
-          </div>
+            }</div>
+             <div style={{position: "relative"}}> 
+            <Label>Choose a file</Label>
+           <Input accept="image/*" name="uploadgalerry" type="file" onChange={changepic} value={InputValue} disabled={userData.galery.length > 3} /></div>
+        </Box>
     )
   }
 export default StepThree
@@ -85,4 +90,18 @@ const Image = styled.img`
   cursor : pointer;
   position : absolute;
   float:right;
+`
+
+const Input = styled.input`
+   opacity: 0;
+   position: absolute;
+   background-color: #e60202;
+   cursor: pointer;
+   top: 0;
+   left: 0;
+`
+const Label = styled.label`
+  cursor: pointer;
+  color: #00b1ca;
+  font-weight: bold;
 `
