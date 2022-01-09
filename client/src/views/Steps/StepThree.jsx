@@ -6,7 +6,6 @@ import Swal from 'sweetalert2'
 import styled  from 'styled-components';
 import Box from '@mui/material/Box';
 import { userContext } from "../CompleteProfile";
-import { min } from 'date-fns';
 const StepThree =() => {
   const {
     userData,
@@ -56,7 +55,6 @@ const StepThree =() => {
     }
     return (
       <Box alignItems="center" display="flex" flexWrap="wrap"  alignContent="center" background="red" justifyContent="center">
-          
            <div>{
            userData.galery.length < 1 ? "" :
             <ImageList>

@@ -2,6 +2,7 @@ import { RegisterFormStyle, SwitchToLogin } from './RegisterForm.style';
 import { FormStyle, TextFieldStyled } from './input.style';
 import useForm from '../../Hooks/useForm';
 import { useState } from 'react';
+import axios from "axios";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -9,8 +10,9 @@ import IconButton from '@mui/material/IconButton';
 
 const Register = (props) => {
     const formLogin = () => {
-        console.log('Callback function when form is submitted!');
-        console.log('Form Values ', values);
+        // console.log('Callback function when form is submitted!');
+        // console.log('Form Values ', values);
+        axios.post("http://localhost:1337/user/signup", values);
     };
     const { handleChange, values, errors, handleSubmit } = useForm(formLogin);
     const [showPassword, setShowPassword] = useState(false);
@@ -25,11 +27,15 @@ const Register = (props) => {
             </div>
             <FormStyle className="form-register" onSubmit={handleSubmit}>
                 <TextFieldStyled
+                    name="username"
+                    onChange={handleChange}
                     className="input-register"
                     label="User Name"
                     variant="outlined"
                 />
                 <TextFieldStyled
+                    name="email"
+                    onChange={handleChange}
                     className="input-register"
                     label="Email Address"
                     variant="outlined"
@@ -37,6 +43,8 @@ const Register = (props) => {
                 <TextFieldStyled
                     className="input-register"
                     label="Password"
+                    name="password"
+                    onChange={handleChange}
                     variant="outlined"
                     type={showPassword ? 'text' : 'password'}
                     InputProps={{
@@ -63,6 +71,8 @@ const Register = (props) => {
                 <TextFieldStyled
                     className="input-register"
                     label="Confirm Password"
+                    name="comfirmPassword"
+                    onChange={handleChange}
                     variant="outlined"
                     type={showPassword ? 'text' : 'password'}
                     InputProps={{

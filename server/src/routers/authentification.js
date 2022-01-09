@@ -2,8 +2,8 @@ const router = require('express').Router()
 const db = require('../database/database.js')
 const jwt = require('jsonwebtoken');
 router.post("/authentification", (req, res) => {
-    const {email, password} = req.body
-    db.query('SELECT * FROM users WHERE email =? AND password =?', [email, password], function (err, result, fields) {
+    const {username, password} = req.body
+    db.query('SELECT * FROM users WHERE username =? AND password =?', [username, password], function (err, result, fields) {
         if (err) 
             return res.status(500)
             .json(
@@ -23,7 +23,7 @@ router.post("/authentification", (req, res) => {
                 }
             )
             } else {
-                const accesstoken = jwt.sign({email, password},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '1h'});
+                const accesstoken = jwt.sign({username, password},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '1h'});
                 try {
                     return res.status(200).json({
                         status: "success",

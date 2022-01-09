@@ -49,7 +49,6 @@ const StepOne = () => {
         })
       }
     }
-
   }
   return (
     <Box sx={{ flexGrow: 0 }} sm={1} md={2} alignItems="center" style={{ display: "flex", flexWrap: "wrap",     alignContent: "center",
@@ -66,8 +65,8 @@ const StepOne = () => {
       </div>
         <form
         style={{  display: "flex", flexDirection: "column" }}>
-          <TextField label={"First Name"} value={userData.fname} name="fname" onChange={updatename} style={{marginBottom: "10px",  width: "100%"}}/>
-          <TextField label={"Last Name"} value={userData.lname} name="lname" onChange={updatename} style={{marginBottom: "10px",  width: "100%"}}/>
+          <TextField label={"First Name"} value={userData.fname} name="firstname" onChange={updatename} style={{marginBottom: "10px",  width: "100%"}}/>
+          <TextField label={"Last Name"} value={userData.lname} name="lastname" onChange={updatename} style={{marginBottom: "10px",  width: "100%"}}/>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Birthday"

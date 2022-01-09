@@ -9,7 +9,7 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="*" element={<NotFound />} />
-                <Route path="/profile" element={<HorizontalLinearStepper />} />
+                <Route path="/completeProfile" element={<HorizontalLinearStepper />} />
             </Routes>
         </BrowserRouter>
     );

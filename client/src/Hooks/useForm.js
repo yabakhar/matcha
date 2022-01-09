@@ -74,7 +74,7 @@ const useForm = (callback) => {
         let name = event.target.name;
         let val = event.target.value;
 
-        validate(event, name, val);
+        // validate(event, name, val);
         //Let's set these values in state
 
         setValues({
@@ -85,15 +85,19 @@ const useForm = (callback) => {
 
     const handleSubmit = (event) => {
         if (event) event.preventDefault();
+        callback();
+        
+        // console.log(values)
 
-        if (
-            Object.keys(errors).length === 0 &&
-            Object.keys(values).length !== 0
-        ) {
-            callback();
-        } else {
-            alert('There is an Error!');
-        }
+        // if (
+        //     Object.keys(errors).length === 0 &&
+        //     Object.keys(values).length !== 0
+        // ) {
+        //     callback();
+        // } else {
+        //     callback();
+            // alert('There is an Error!');
+        // }
     };
 
     return {

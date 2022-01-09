@@ -11,8 +11,8 @@ dotenv.config();
 app.use(cors({
     origin: "*"
 }))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 allRoutes(app)
 app.listen(port, () => {
   console.log(`yabakhar app listening at http://localhost:${port}`)

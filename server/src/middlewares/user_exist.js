@@ -1,7 +1,8 @@
 const db = require("../database/database.js");
 const user_exist = (req, res, next) => {
-    const {email, password} = req.body
-    db.query('SELECT * FROM users WHERE email =?', [email], function (err, result, fields) {
+    const {email,username} = req.body
+    console.log(req.body);
+    db.query('SELECT * FROM users WHERE email =? OR username =?', [email,username], function (err, result, fields) {
         if (err) 
             return res.status(500)
             .json(
@@ -17,7 +18,7 @@ const user_exist = (req, res, next) => {
             .json(
                 {
                     status: "error",
-                    message: "email deja exist !",
+                    message: "username OR email deja exist !",
                 }
             )
             } else {

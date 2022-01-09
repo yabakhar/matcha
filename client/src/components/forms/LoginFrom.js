@@ -5,6 +5,7 @@ import {
     LoginStyle,
 } from './LoginForm.style';
 import { TextFieldStyled } from './input.style';
+import axios from "axios";
 import useForm from '../../Hooks/useForm';
 import { ReactComponent as Google } from '../../assets/icons/Google.svg';
 import { useState } from 'react';
@@ -15,8 +16,9 @@ import IconButton from '@mui/material/IconButton';
 
 const Login = (props) => {
     const formLogin = () => {
-        console.log('Callback function when form is submitted!');
-        console.log('Form Values ', values);
+        // console.log('Callback function when form is submitted!');
+        console.log('Form Values ', values.username, values.password);
+        axios.post("http://localhost:1337/user/authentification", values);
     };
     const { handleChange, values, errors, handleSubmit } = useForm(formLogin);
     const [showPassword, setShowPassword] = useState(false);
@@ -30,11 +32,15 @@ const Login = (props) => {
             </h1>
             <LoginStyle onSubmit={handleSubmit}>
                 <TextFieldStyled
+                    name="username"
+                    onChange={handleChange}
                     className="input-login"
                     label="Email Address or User Name"
                     variant="outlined"
                 />
                 <TextFieldStyled
+                    name="password"
+                    onChange={handleChange}
                     className="input-login"
                     label="Password"
                     variant="outlined"

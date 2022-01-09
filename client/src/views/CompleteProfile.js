@@ -5,6 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Content  from "./ContentCompleteProfile";
+import axios from "axios";
 import {
   ContainerStyle
 } from './CompleteProfile.style';
@@ -17,10 +18,9 @@ const steps = [
 export const userContext = React.createContext();
 export default function HorizontalLinearStepper() {
   const [userData, setUserData] = useState({
-    fname: "",
-    lname: "",
+    firstname: "",
+    lastname: "",
     galery: []
-    
   })
   const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
@@ -30,7 +30,9 @@ export default function HorizontalLinearStepper() {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };   
-
+  function createPost(userData) {
+    axios.post("http://localhost:1337/user/completeProfile", userData);
+  }
   return (
   <div style={{display : 'flex', alignItems : 'center', justifyContent : 'space-evenly', width : '100%', flexDirection : 'column', height : '100%'}}>
       <Stepper activeStep={activeStep}  style={{width : '90%'}}>
@@ -46,8 +48,9 @@ export default function HorizontalLinearStepper() {
       </Stepper>
       {activeStep === steps.length ? (
         <>
-           {console.log(userData)}
-            Hello world!
+          {
+           createPost(userData)
+          }
         </>
       ) : (
         <>
