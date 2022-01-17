@@ -14,6 +14,7 @@ app.use(cors({
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 allRoutes(app)
+
 app.listen(port, () => {
   console.log(`yabakhar app listening at http://localhost:${port}`)
 });

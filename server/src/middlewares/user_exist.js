@@ -1,7 +1,7 @@
 const db = require("../database/database.js");
 const user_exist = (req, res, next) => {
     const {email,username} = req.body
-    console.log(req.body);
+    console.log("ana hna 464 5486");
     db.query('SELECT * FROM users WHERE email =? OR username =?', [email,username], function (err, result, fields) {
         if (err) 
             return res.status(500)

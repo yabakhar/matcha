@@ -1,7 +1,7 @@
 
 const mysql = require('mysql');
 const db = mysql.createConnection({
-    host: "192.168.99.101",
+    host: "192.168.99.100",
     user: "root",
     password: "root",
     database: "mydb"
@@ -9,7 +9,6 @@ const db = mysql.createConnection({
 db.connect((err) => {
     if (err) {
         console.log(`err ${err}`);
-        
     } else
         console.log("ana mconnece   ");
         
