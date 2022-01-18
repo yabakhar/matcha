@@ -1,5 +1,5 @@
 var nodemailer = require('nodemailer');
-
+const jwt = require('jsonwebtoken');
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
@@ -10,11 +10,14 @@ var transporter = nodemailer.createTransport({
   });
   
   exports.sendEmail = (email, subject) => {
+    const token = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '24h'});
+    const link = `${process.env.CLIENT_SERVER}/verify?token=${token}`
     const mailOptions = {
       from: 'servermatcha7@gmail.com',
       to: email,
       subject: subject,
-      text: 'test'
+      text: 'test',
+      html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
     };
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
