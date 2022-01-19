@@ -1,5 +1,6 @@
 var nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const db = require('../database/database.js')
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.gmail.com',
@@ -24,6 +25,14 @@ var transporter = nodemailer.createTransport({
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
+        db.query('INSERT validatToken(email,Token) VALUES (?,?)', [email, token], function (err, result, fields) {
+        if (err) 
+          console.log(err);
+        else
+        {
+          console.log(email);
+        }
+      });
     }
   });
   }
