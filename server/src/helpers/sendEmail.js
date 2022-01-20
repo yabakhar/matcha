@@ -9,9 +9,7 @@ var transporter = nodemailer.createTransport({
       pass: 'Youssef_'
     }
   });
-  
-  exports.sendEmail = (email, subject) => {
-    const token = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '24h'});
+  exports.sendEmail = (subject, token,email) => {
     const link = `${process.env.CLIENT_SERVER}/verify?token=${token}`
     const mailOptions = {
       from: 'servermatcha7@gmail.com',
@@ -25,18 +23,9 @@ var transporter = nodemailer.createTransport({
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
-        db.query('INSERT validatToken(email,Token) VALUES (?,?)', [email, token], function (err, result, fields) {
-        if (err) 
-          console.log(err);
-        else
-        {
-          console.log(email);
-        }
-      });
     }
   });
   }
-  
 
  
 
