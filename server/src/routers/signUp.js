@@ -16,8 +16,8 @@ router.post("/signup",user_exist, (req, res) => {
         ],
         (err, result, fields) => {
             if (err) {
-                return res.status(500).json({
-                    status: "error",
+                return res.status(400).json({
+                    status: 400,
                     message: `server error ${err}`
                 });
             }

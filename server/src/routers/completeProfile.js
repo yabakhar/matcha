@@ -4,10 +4,10 @@ router.post("/completeProfile", (req, res) => {
     const {lastname, firstname} = req.body
     db.query('ALTER TABLE users ADD lastname =? varchar(10),firstname =? VARCHAR(10)', [lastname, firstname], function (err, result, fields) {
         if (err) 
-            return res.status(500)
+            return res.status(400)
             .json(
                 {
-                    status: "error",
+                    status: 400,
                     message: "Database error",
                 }
             )
