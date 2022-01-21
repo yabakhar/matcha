@@ -1,27 +1,25 @@
 const router = require('express').Router()
-const jwt = require('jsonwebtoken');
 const db = require('../database/database.js')
-router.post("/validate_email", (req, res) => {
-    const { token } = req.body;
-    // console.log(token);
-    const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-    db.query('SELECT * FROM users WHERE email =?', [user.email], function (err, result, fields) {
+const checkToken = require('../middlewares/check_validateToken')
+router.post("/validate_email",checkToken, (req, res) => {
+    const { payload } = req.body;
+    db.query('SELECT * FROM users WHERE email =?', [payload.email], function (err, result, fields) {
         if (err)
-            return res.status(500)
+            return res.status(400)
                 .json(
                     {
-                        status: "error",
+                        status: 400,
                         message: "Database error",
                     }
                 )
         else {
             if (result[0].tokenVerify) {
-                db.query('UPDATE users SET tokenVerify=? WHERE email=?', ["", user.email], function (err, result, fields) {
+                db.query('UPDATE users SET tokenVerify=? WHERE email=?', ["", payload.email], function (err, result, fields) {
                     if (err)
-                        return res.status(401)
+                        return res.status(400)
                             .json(
                                 {
-                                    status: "error",
+                                    status: 400,
                                     message: "Database error",
                                 }
                             )
@@ -29,17 +27,17 @@ router.post("/validate_email", (req, res) => {
                             return res.status(200)
                                 .json(
                                     {
-                                        status: "valide",
+                                        status: 200,
                                         message: "account validtly successfully!",
                                     }
                                 )
                         }
                 });
             } else {
-                return res.status(401)
+                return res.status(400)
                 .json(
                     {
-                        status: "deja",
+                        status: 400,
                         message: "token deja valide",
                     }
                 )
@@ -47,5 +45,5 @@ router.post("/validate_email", (req, res) => {
         }
     });
 });
+
 module.exports = router;
-// e  n  f    p

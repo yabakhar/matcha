@@ -1,19 +1,34 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect,useState,forwardRef } from "react";
 import { useSearchParams } from 'react-router-dom';
-
+import MuiAlert from '@mui/material/Alert';
 export default function ComfirmAccount() 
 {
+    const Alert = forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+      });
     const [searchParams] = useSearchParams();
-    function postValidatEmail(token) {
-        axios.post("http://localhost:1337/user/validate_email",{token}); 
+    const [message, setMessage] = useState({ error: null, success: null });
+    
+    const postValidatEmail = async (token) => {
+        axios.post("http://localhost:1337/user/validate_email",{token})
+        .then(res => {
+            setMessage({...message, success: res.data.message});
+            console.log(message);
+        })
+        .catch(err => {
+            console.log (err.response.data);
+            setMessage({...message, error: err.response.data.message});
+            console.log(message);
+        });
     }
-    useEffect(() => {
+    useEffect( () => {
         const token = searchParams.get('token');
         if (token) postValidatEmail(token);
-    }, [searchParams]);
-    
+    }, []);
     return(
-        <div><p>ahahahhah</p></div>
+    <div>
+          {(message.error) ? <Alert severity="error">{message.error}</Alert>:<Alert severity="success">{message.success}</Alert>}
+    </div>
     )
 }
