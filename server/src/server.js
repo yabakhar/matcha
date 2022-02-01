@@ -4,7 +4,7 @@ const port = 1337
 const cors = require('cors')
 const bodyParser = require('body-parser')
 
-const allRoutes = require("./routers/")
+const allRoutes = require("./routers")
 
 const dotenv = require('dotenv');
 dotenv.config();

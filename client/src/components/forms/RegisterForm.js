@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 
 const Register = (props) => {
     const formLogin = () => {
-        // console.log('Callback function when form is submitted!');
+        console.log('Callback function when form is submitted!',values);
         axios.post("http://localhost:1337/user/signup", values);
     };
     const { handleChange, values, errors, handleSubmit } = useForm(formLogin);

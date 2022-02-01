@@ -10,7 +10,7 @@ db.connect((err) => {
     if (err) {
         console.log(`err ${err}`);
     } else
-        console.log("ana mconnece   ");
+        console.log("ana mconnece");
         
 });
 module.exports = db
