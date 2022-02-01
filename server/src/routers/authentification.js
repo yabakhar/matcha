@@ -1,10 +1,12 @@
 const router = require('express').Router()
 const db = require('../database/database.js')
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto')
 const dd = require('../middlewares/dd')
 router.post("/authentification",dd, (req, res) => {
     const {username, password} = req.body
-    db.query('SELECT * FROM users WHERE username =? AND password =?', [username, password], function (err, result, fields) {
+    let hashpassword = crypto.createHash('md5').update(password).digest("hex")
+    db.query('SELECT * FROM users WHERE username =? AND password =?', [username, hashpassword], function (err, result, fields) {
         if (err) 
             return res.status(400)
             .json(
