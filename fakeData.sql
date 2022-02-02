@@ -4,11 +4,11 @@ create table users (
 	last_name VARCHAR(50),
 	email VARCHAR(50),
 	gender VARCHAR(50),
-	tokenVerify VARCHAR(50),
+	tokenVerify VARCHAR(255),
 	orientation VARCHAR(50),
 	username VARCHAR(50),
 	password VARCHAR(50),
-	avatar VARCHAR(50),
+	avatar VARCHAR(255),
 	rating INT,
 	lat VARCHAR(50),
 	lon VARCHAR(50),
@@ -521,7 +521,7 @@ insert into users (id, first_name, last_name, email, gender, tokenVerify, orient
 create table photos (
 	id INT,
 	iduser INT,
-	photo VARCHAR(50)
+	photo VARCHAR(255)
 );
 
 insert into photos (id, iduser, photo) values 
