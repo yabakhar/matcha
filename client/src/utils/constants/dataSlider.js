@@ -2,6 +2,7 @@ import { ReactComponent as FirstSVG } from '../../assets/LoginSignUp/undraw_ever
 import { ReactComponent as SecondSVG } from '../../assets/LoginSignUp/undraw_intense_feeling_ft-9-s.svg';
 import { ReactComponent as ThirdSVG } from '../../assets/LoginSignUp/undraw_travelers_re_y25a.svg';
 import { ReactComponent as ForthSVG } from '../../assets/LoginSignUp/undraw_travel_together_re_kjf2.svg';
+
 export const dataSlider = [
     {
         author: 'Crystal Ball',

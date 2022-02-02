@@ -12,7 +12,8 @@ const dd = (req, res, next) => {
             )
         else
         {
-            if (result[0].tokenVerify)
+
+            if (result[0] && result[0].tokenVerify)
             {return res.status(401)
                 .json(
                     {
