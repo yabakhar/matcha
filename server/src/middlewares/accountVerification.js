@@ -1,5 +1,5 @@
 const db = require("../database/database.js");
-const dd = (req, res, next) => {
+const accountVerification = (req, res, next) => {
     const {email,username} = req.body
     db.query('SELECT * FROM users WHERE email =? OR username =?', [email,username], function (err, result, fields) {
         if (err) 
@@ -28,4 +28,4 @@ const dd = (req, res, next) => {
       }
     );
 };
-module.exports = dd;
+module.exports = accountVerification;

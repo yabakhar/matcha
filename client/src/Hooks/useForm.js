@@ -8,21 +8,14 @@ const useForm = (callback) => {
     const [errors, setErrors] = useState({});
 
     const validate = (event, name, value) => {
-        //A function to validate each input values
-
         switch (name) {
             case 'username':
                 if (value.length <= 4) {
-                    // we will set the error state
-
                     setErrors({
                         ...errors,
                         username: 'Username atleast have 5 letters',
                     });
                 } else {
-                    // set the error state empty or remove the error for username input
-
-                    //omit function removes/omits the value from given object and returns a new object
                     let newObj = omit(errors, 'username');
                     setErrors(newObj);
                 }
@@ -66,7 +59,6 @@ const useForm = (callback) => {
         }
     };
 
-    //A method to handle form inputs
     const handleChange = (event) => {
         //To stop default events
         event.persist();
@@ -74,9 +66,8 @@ const useForm = (callback) => {
         let name = event.target.name;
         let val = event.target.value;
 
-        // validate(event, name, val);
+        validate(event, name, val);
         //Let's set these values in state
-
         setValues({
             ...values,
             [name]: val,
@@ -86,18 +77,6 @@ const useForm = (callback) => {
     const handleSubmit = (event) => {
         if (event) event.preventDefault();
         callback();
-        
-        // console.log(values)
-
-        // if (
-        //     Object.keys(errors).length === 0 &&
-        //     Object.keys(values).length !== 0
-        // ) {
-        //     callback();
-        // } else {
-        //     callback();
-            // alert('There is an Error!');
-        // }
     };
 
     return {

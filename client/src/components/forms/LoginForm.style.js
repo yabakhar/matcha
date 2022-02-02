@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { FormStyle } from './input.style';
-export const LoginFormStyle = styled.div`
+export const LoginFormStyle = styled(motion.div)`
     width: 100%;
     height: 100%;
     display: flex;
@@ -103,7 +104,7 @@ export const FooterStyle = styled.div`
 `;
 
 export const LoginStyle = styled(FormStyle)`
-    flex: 1 1 40%;
+    flex: 0 0 30%;
     padding: 1rem 0;
     .input-login {
         width: 70%;

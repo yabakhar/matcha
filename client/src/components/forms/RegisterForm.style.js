@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-export const RegisterFormStyle = styled.div`
+import { motion } from 'framer-motion';
+export const RegisterFormStyle = styled(motion.div)`
     width: 100%;
     height: 100%;
     display: flex;

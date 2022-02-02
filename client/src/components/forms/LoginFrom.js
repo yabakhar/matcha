@@ -5,42 +5,72 @@ import {
     LoginStyle,
 } from './LoginForm.style';
 import { TextFieldStyled } from './input.style';
-import axios from "axios";
 import useForm from '../../Hooks/useForm';
 import { ReactComponent as Google } from '../../assets/icons/Google.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
+// import { motion, AnimatePresence } from 'framer-motion';
+import { userLoginAction } from '../../store/actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
+// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
-    const formLogin = () => {
-        // console.log('Callback function when form is submitted!');
-        console.log('Form Values ', values.username, values.password);
-        axios.post("http://localhost:1337/user/authentification", values);
+    const dispatch = useDispatch();
+
+    // const user = useSelector((state) => state.user);
+    const loginForm = () => {
+        dispatch(userLoginAction(values.username, values.password));
+        console.log('Form Values ', values);
     };
-    const { handleChange, values, errors, handleSubmit } = useForm(formLogin);
+    // let navigate = useNavigate();
+    // console.log('user ', user);
+    // useEffect(() => {
+    // if (user) {
+    // navigate('/profile');
+    // props.history.push('/profile');
+    // console.log(user);
+    // }
+    // }, [user]);
+    const { handleChange, values, errors, handleSubmit } = useForm(loginForm);
     const [showPassword, setShowPassword] = useState(false);
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    // auth.onAuthStateChanged((user) => {
+    //     setUser(user);
+    //     console.log(user);
+    // });
+    const Variant = {
+        hidden: {
+            x: 500,
+            opaciy: 0,
+        },
+        show: {
+            opacity: 1,
+            x: [500, 0],
+            transition: { duration: 1, easing: 'easeInOut' },
+        },
+    };
     return (
-        <LoginFormStyle>
+        <LoginFormStyle animate="show" initial="hidden" variants={Variant}>
             <h1>
                 <span> Welcome back! </span>Please login to your account.
             </h1>
             <LoginStyle onSubmit={handleSubmit}>
                 <TextFieldStyled
+                    className="input-login"
+                    label="UserName"
+                    variant="outlined"
                     name="username"
                     onChange={handleChange}
-                    className="input-login"
-                    label="Email Address or User Name"
-                    variant="outlined"
                 />
                 <TextFieldStyled
-                    name="password"
                     onChange={handleChange}
+                    name="password"
                     className="input-login"
                     label="Password"
                     variant="outlined"
@@ -101,51 +131,3 @@ const Login = (props) => {
 };
 
 export default Login;
-
-// <LoginStyle onSubmit={handleSubmit}>
-// <FormGroupStyle>
-//     <FormFieldStyle
-//         type="email"
-//         name="email"
-//         placeholder="Email Address or User Name"
-//         onChange={handleChange}
-//     />
-//     <FormLabelStyle>Email Address or User Name</FormLabelStyle>
-//     {errors.email && <h3>{errors.email}</h3>}
-// </FormGroupStyle>
-// <FormGroupStyle>
-//     <FormFieldStyle
-//         minLength="8"
-//         type="password"
-//         name="password"
-//         placeholder="Password"
-//         onChange={handleChange}
-//     />
-//     <FormLabelStyle>Password</FormLabelStyle>
-//     {errors.password && <h3>{errors.password}</h3>}
-// </FormGroupStyle>
-// <input type="submit" value="Login" className="submit" />
-// </LoginStyle>
-
-// <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-//     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-//     <OutlinedInput
-//         id="outlined-adornment-password"
-//         type={values.showPassword ? 'text' : 'password'}
-//         value={values.password}
-//         onChange={handleChange('password')}
-//         endAdornment={
-//             <InputAdornment position="end">
-//                 <IconButton
-//                     aria-label="toggle password visibility"
-//                     onClick={handleClickShowPassword}
-//                     onMouseDown={handleMouseDownPassword}
-//                     edge="end"
-//                 >
-//                     {values.showPassword ? <VisibilityOff /> : <Visibility />}
-//                 </IconButton>
-//             </InputAdornment>
-//         }
-//         label="Password"
-//     />
-// </FormControl>;

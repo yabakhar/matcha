@@ -1,8 +1,8 @@
-import { dataSlider } from '../../utils/constants/dataSlider';
+import { dataSlider } from '../utils/constants/dataSlider';
 import { useState, useEffect } from 'react';
-import { Content } from './RightSide.style';
-import { ReactComponent as LeftQuote } from '../../assets/LoginSignUp/sideRight/leftQuotes.svg';
-import { ReactComponent as RightQuote } from '../../assets/LoginSignUp/sideRight/rightQuotes.svg';
+import { Content } from './layout/RightSide.style';
+import { ReactComponent as LeftQuote } from '../assets/LoginSignUp/sideRight/leftQuotes.svg';
+import { ReactComponent as RightQuote } from '../assets/LoginSignUp/sideRight/rightQuotes.svg';
 
 const Slider = () => {
     const [slideIndex, setSlideIndex] = useState(0);
