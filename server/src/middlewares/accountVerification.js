@@ -3,6 +3,7 @@ const dd = (req, res, next) => {
     const {email,username} = req.body
     db.query('SELECT * FROM users WHERE email =? OR username =?', [email,username], function (err, result, fields) {
         if (err) 
+        {
             return res.status(400)
             .json(
                 {
@@ -10,9 +11,10 @@ const dd = (req, res, next) => {
                     message: "Database error",
                 }
             )
+        }
         else
         {
-            if (result[0].tokenVerify)
+            if (result[0] && result[0].tokenVerify)
             {return res.status(401)
                 .json(
                     {

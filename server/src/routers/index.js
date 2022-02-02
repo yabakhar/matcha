@@ -3,6 +3,7 @@ const getUsers = require('../routers/getAllUsers.js')
 const signup = require('../routers/signUp.js')
 const completeProfile = require('../routers/completeProfile.js')
 const validateEmail = require('../routers/validateEmail.js')
+const changePassword = require('./changePassword.js')
 const allRoutes = (app) => {
     const routes = {
         '/user': [
@@ -11,6 +12,7 @@ const allRoutes = (app) => {
             signup,
             completeProfile,
             validateEmail,
+            changePassword,
         ],
     }
     Object.keys(routes).forEach((route) => {
