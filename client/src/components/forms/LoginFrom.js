@@ -32,7 +32,7 @@ const Login = (props) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.userLogin);
   const Variant = {
     hidden: {
       x: 500,

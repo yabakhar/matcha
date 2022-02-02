@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const [log, setLog] = useState(true);
-  const { loading, error } = useSelector((state) => state.user);
+  // const { loading, error } = useSelector((state) => state.user);
   return (
     <ContainerStyle>
       <LeftSideStyle>

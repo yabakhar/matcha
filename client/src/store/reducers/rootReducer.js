@@ -1,6 +1,9 @@
-import { combineReducers } from 'redux';
-import { userLoginReducer } from './userReducer';
+import { combineReducers } from "redux";
+import { userLoginReducer, registerRducer } from "./userReducer";
 
-const rootReducer = combineReducers({ user: userLoginReducer });
+const rootReducer = combineReducers({
+  userLogin: userLoginReducer,
+  userRegister: registerRducer,
+});
 
 export default rootReducer;
