@@ -4,11 +4,6 @@ import axios from 'axios';
 export const userLoginAction = (username, password) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.USER_LOGIN_REQUEST });
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // };
         const data = await axios.post(
             'http://localhost:1337/user/authentification',
             { username, password }
