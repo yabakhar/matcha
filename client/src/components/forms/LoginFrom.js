@@ -19,13 +19,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+// import { Rings } from "react-loader-spinner";
+import ForgotPassword from "../../views/Home/ForgotPassword";
 
+import { Rings } from "react-loader-spinner";
 const Login = (props) => {
   const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
   const loginForm = () => {
-    dispatch(userLoginAction(values.username, values.password));
-    console.log("Form Values ", values);
+    if (!loading) {
+      dispatch(userLoginAction(values.username, values.password));
+    } else {
+      console.log("tsena ", values);
+    }
   };
   const { handleChange, values, errors, handleSubmit } = useForm(loginForm);
   const [showPassword, setShowPassword] = useState(false);
@@ -47,12 +53,15 @@ const Login = (props) => {
 
   useEffect(() => {
     if (error) {
-      MySwal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "unauthorized, confirm Email First!",
-      });
+      console.log(error);
     }
+    // if (error) {
+    //   MySwal.fire({
+    //     icon: "error",
+    //     title: "Oops...",
+    //     text: "unauthorized, confirm Email First!",
+    //   });
+    // }
   }, [error]);
   return (
     <LoginFormStyle animate="show" initial="hidden" variants={Variant}>
@@ -66,8 +75,10 @@ const Login = (props) => {
           variant="outlined"
           name="username"
           onChange={handleChange}
+          error={error ? true : false}
         />
         <TextFieldStyled
+          error={error ? true : false}
           onChange={handleChange}
           name="password"
           className="input-login"
@@ -89,7 +100,12 @@ const Login = (props) => {
             ),
           }}
         />
-        <input type="submit" value="Login" className="submit" />
+
+        {loading ? (
+          <Rings ariaLabel="loading-indicator" color="red" />
+        ) : (
+          <input type="submit" value="Login" className="submit" />
+        )}
       </LoginStyle>
       <HelpersStyle>
         <p>
@@ -103,7 +119,8 @@ const Login = (props) => {
             Sign Up
           </span>
         </p>
-        <p className="forgot">Forgot Password?</p>
+        <ForgotPassword className="forgot" />
+        {/* <p className="forgot">Forgot Password?</p> */}
       </HelpersStyle>
       <FooterStyle>
         <div className="social">

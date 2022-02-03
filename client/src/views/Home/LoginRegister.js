@@ -5,10 +5,10 @@ import {
   FromsStyle,
   CopyrightStyle,
 } from "./LoginRegister.style";
-import Login from "../components/forms/LoginFrom";
-import Register from "../components/forms/RegisterForm";
-import RightSide from "../components/layout/RightSide";
-import { ReactComponent as Logo } from "../assets/Logo.svg";
+import Login from "../../components/forms/LoginFrom";
+import Register from "../../components/forms/RegisterForm";
+import RightSide from "../../components/layout/RightSide";
+import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import { useSelector } from "react-redux";
 
 const Home = () => {
