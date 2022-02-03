@@ -2,9 +2,8 @@ router = require('express').Router()
 const db = require('../database/database.js')
 const auth = require('../middlewares/auth')
 router.get("/affiche", auth, (req, res) => {
-    // const {username,password} = req.body
-    username = "ccartnera";
-    db.query("SELECT users.username,users.id FROM users INNER JOIN photos WHERE users.username=?", [username], function (err, result, fields) {
+    const {id} = req.body
+    db.query("SELECT users.username,users.id FROM users INNER JOIN photos ON users.id=?", [id], function (err, result, fields) {
         try {
             return res.status(200).json({
                 status: "success",

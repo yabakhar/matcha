@@ -10,7 +10,7 @@ var transporter = nodemailer.createTransport({
     }
   });
   exports.sendEmail = (subject, token,email) => {
-    const link = `${process.env.CLIENT_SERVER}/verify?token=${token}`
+    const link = `${process.env.CLIENT_SERVER}/${subject}?token=${token}`
     const mailOptions = {
       from: 'servermatcha7@gmail.com',
       to: email,
@@ -26,10 +26,3 @@ var transporter = nodemailer.createTransport({
     }
   });
   }
-
- 
-
-// module.exports = {sendEmail}; 
-
-
-//   servermatcha7@gmail.com  |  Youssef_

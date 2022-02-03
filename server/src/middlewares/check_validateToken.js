@@ -5,7 +5,7 @@ const checkToken = (req, res, next) => {
         if (err) 
             return res.status(400).json({status:400,message:"Token Invalide"})
         else {
-            req.body = {payload : result};
+            Object.assign(req.body,{payload : result});
             next();
         }
     });
