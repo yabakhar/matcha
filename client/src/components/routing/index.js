@@ -3,6 +3,7 @@ import Home from "../../views/Home/LoginRegister";
 import Profile from "../../views/Profile/Profile";
 import { NotFound } from "./NotFound";
 import ComfirmAccount from "../../views/CompleteProfile/VerifyEmail";
+import NewPassword from "../../views/Home/NewPassword";
 
 const Router = () => {
   return (
@@ -11,6 +12,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/verify" element={<ComfirmAccount />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/newpassword" element={<NewPassword />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
