@@ -11,6 +11,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/verify" element={<ComfirmAccount />} />
+        <Route path="/ForgetPassword" element={<NewPassword />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/newpassword" element={<NewPassword />} />
         <Route path="*" element={<Home />} />
