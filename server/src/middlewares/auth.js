@@ -3,10 +3,10 @@ const auth = (req, res, next) => {
     if (req.headers['authorization']) {
         token = req.headers['authorization'].replace("Bearer ", '');
         try {
-            const id = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-            if (id)
+            const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+            if (payload)
             {
-                Object.assign(req.body,id);
+                Object.assign(req.body,payload);
                 next();
             }
         } catch (err) {

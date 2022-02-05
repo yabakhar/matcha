@@ -3,9 +3,9 @@ const db = require('../database/database.js')
 const crypto = require('crypto')
 const checkToken = require('../middlewares/check_validateToken');
 router.post("/newPassword", checkToken,(req, res) => {
-    const {id,newPassword} = req.body
-    let hashpassword = crypto.createHash('md5').update(newPassword).digest("hex")
-    db.query('UPDATE users SET password=? where id=?', [hashpassword,id], function (err, result, fields) {
+    const {payload,password} = req.body
+    let hashpassword = crypto.createHash('md5').update(password).digest("hex")
+    db.query('UPDATE users SET password=? where email=?', [hashpassword,payload.email], function (err, result, fields) {
         if (err) 
            {
             return res.status(400)

@@ -5,6 +5,7 @@ const completeProfile = require('../routers/completeProfile.js')
 const validateEmail = require('../routers/validateEmail.js')
 const changePassword = require('./changePassword.js')
 const forgetpassword = require('./forgetpassward.js')
+const newPassword = require('./newPassword.js')
 const allRoutes = (app) => {
     const routes = {
         '/user': [
@@ -15,6 +16,7 @@ const allRoutes = (app) => {
             validateEmail,
             changePassword,
             forgetpassword,
+            newPassword,
         ],
     }
     Object.keys(routes).forEach((route) => {

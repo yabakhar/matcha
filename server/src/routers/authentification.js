@@ -9,7 +9,6 @@ router.post("/authentification",accountVerification, (req, res) => {
     db.query('SELECT * FROM users WHERE username =? AND password =?', [username, hashpassword], function (err, result, fields) {
         if (err) 
            {
-            console.log("ana hna12315");
             return res.status(400)
             .json(
                 {

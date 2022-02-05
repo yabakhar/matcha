@@ -20,8 +20,9 @@ router.post("/forgetpassword",(req, res) => {
             try {
                 if (result.length == 1)
                 {
-                    const token = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '24h'});
-                    helpers.sendEmail("ForgetPassword", token,email);
+                    const token = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '10m'});
+                    console.log(jwt.verify(token, process.env.ACCESS_TOKEN_SECRET));
+                    helpers.sendEmail("ForgetPassword", token,email,"10m");
                     return res.status(200).json({
                         status: 200,
                         message: "Email was send.",

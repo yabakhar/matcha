@@ -28,7 +28,7 @@ router.post("/signup",user_exist, (req, res) => {
                 message: "User created successfully!"
             });
             // Send email to the user
-            helpers.sendEmail("validate Account", token,email);
+            helpers.sendEmail("validateAccount", token,email,"24h");
         }
     );
 });
