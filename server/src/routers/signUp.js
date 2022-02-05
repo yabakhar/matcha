@@ -9,12 +9,13 @@ router.post("/signup",user_exist, (req, res) => {
     const token = jwt.sign({email},process.env.ACCESS_TOKEN_SECRET,{expiresIn: '24h'});
     let hashpassword = crypto.createHash('md5').update(password).digest("hex")
     db.query(
-        "INSERT INTO users(email,password,username,tokenVerify) VALUES (?,?,?,?)",
+        "INSERT INTO users(email,password,username,tokenVerify,complete) VALUES (?,?,?,?,?)",
         [
             email,
             hashpassword,
             username,
-            token
+            token,
+            0,
         ],
         (err, result, fields) => {
             if (err) {
