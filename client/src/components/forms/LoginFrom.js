@@ -29,6 +29,7 @@ const Login = (props) => {
   const loginForm = () => {
     if (!loading) {
       dispatch(userLoginAction(values.username, values.password));
+      console.log("logged");
     } else {
       console.log("tsena ", values);
     }
@@ -119,7 +120,7 @@ const Login = (props) => {
             Sign Up
           </span>
         </p>
-        <ForgotPassword className="forgot" />
+        <ForgotPassword />
         {/* <p className="forgot">Forgot Password?</p> */}
       </HelpersStyle>
       <FooterStyle>

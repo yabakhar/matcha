@@ -8,8 +8,6 @@ export const userLoginAction = (username, password) => async (dispatch) => {
       "http://localhost:1337/user/authentification",
       { username, password }
     );
-    console.log("wa bigola");
-
     // localStorage.setItem('user', JSON.stringify(data.data));
     dispatch({ type: loginActionTypes.USER_LOGIN_SUCCESS, payload: data.data });
   } catch (error) {

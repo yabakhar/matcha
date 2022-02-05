@@ -12,16 +12,13 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const Register = ({ setLog }) => {
   const dispatch = useDispatch();
-  // dispatch({ type: "USER_REGISTER_CLEAR" });
   const MySwal = withReactContent(Swal);
   const register = () => {
-    // console.log(errors);
     dispatch(
       userRegisterAction(values.username, values.email, values.password)
     );
   };
   const data = useSelector((state) => state.userRegister);
-  //   const { user, {status : status, message : message}, loading } = data;
   useEffect(() => {
     if (data && data.user && data.user.status === "success") {
       MySwal.fire(

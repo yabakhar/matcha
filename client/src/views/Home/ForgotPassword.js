@@ -1,8 +1,10 @@
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import styled from "styled-components";
+import axios from "axios";
+import { Rings } from "react-loader-spinner";
 const style = {
   border: "2px solid red",
   position: "absolute",
@@ -30,15 +32,69 @@ const StyledModal = styled.form`
   .modale-input {
     width: 100%;
   }
+  .modale-message {
+    font-size: 1.5rem;
+    color: ${(props) => props.theme.colors.text};
+  }
 `;
+
+const StyledForgot = styled.p`
+  cursor: pointer;
+  background-image: linear-gradient(
+    45deg,
+    ${(props) => props.theme.colors.primary},
+    ${(props) => props.theme.colors.secondary}
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+`;
+
+// forgetpassword
 
 const ForgotPassword = () => {
   const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState({});
+  const [error, setError] = useState(null);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setError(null);
+    setResult({});
+  };
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const sendEmail = () => {
+    setLoading(true);
+    const res = axios
+      .post("http://localhost:1337/user/forgetpassword", { email: value })
+      .then((res) => {
+        setResult(res.data);
+        setError(null);
+        setValue("");
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+        setValue("");
+        setResult(null);
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendEmail();
+  };
   return (
     <>
-      <p onClick={handleOpen}>Forgot Password ?</p>
+      <StyledForgot onClick={handleOpen}>Forgot Password ?</StyledForgot>
       <Modal
         open={open}
         onClose={handleClose}
@@ -46,17 +102,33 @@ const ForgotPassword = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <StyledModal>
+          <StyledModal onSubmit={handleSubmit}>
             <h1 className="modal-title">Reset Password</h1>
             <TextField
               className="modale-input"
               label="Email"
               variant="outlined"
               name="email"
-              // onChange={handleChange}
-              // error={error ? true : false}
+              value={value}
+              onChange={handleChange}
             />
-            <input type="text" name="submit" type="submit" value="send email" />
+            {!loading ? (
+              error ? (
+                <p>{error}</p>
+              ) : result.message === "Email was send." ? (
+                <h1 className="modale-message">{result.message}</h1>
+              ) : null
+            ) : null}
+            {loading ? (
+              <Rings ariaLabel="loading-indicator" color="red" />
+            ) : (
+              <input
+                type="text"
+                name="submit"
+                type="submit"
+                value="send email"
+              />
+            )}
           </StyledModal>
         </Box>
       </Modal>
