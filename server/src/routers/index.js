@@ -27,4 +27,4 @@ const allRoutes = (app) => {
     })
 }
 
-module.exports = allRoutes
+module.exports = allRoutes;
