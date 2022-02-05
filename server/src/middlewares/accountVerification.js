@@ -1,6 +1,7 @@
 const db = require("../database/database.js");
 const accountVerification = (req, res, next) => {
     const {email,username} = req.body
+    
     db.query('SELECT * FROM users WHERE email =? OR username =?', [email,username], function (err, result, fields) {
         if (err) 
         {
