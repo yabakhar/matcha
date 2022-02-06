@@ -11,6 +11,7 @@ const ComfirmAccount = () => {
   const [message, setMessage] = useState({ error: null, success: null });
 
   const postValidatEmail = async (token) => {
+    
     axios
       .post("http://localhost:1337/user/validate_email", { token })
       .then((res) => {
