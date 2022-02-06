@@ -24,12 +24,12 @@ import ForgotPassword from "../../views/Home/ForgotPassword";
 
 import { Rings } from "react-loader-spinner";
 const Login = (props) => {
+  let navigate = useNavigate();
   const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
   const loginForm = () => {
     if (!loading) {
       dispatch(userLoginAction(values.username, values.password));
-      console.log("logged");
     } else {
       console.log("tsena ", values);
     }
@@ -39,7 +39,8 @@ const Login = (props) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  const { loading, error } = useSelector((state) => state.userLogin);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, user } = userLogin;
   const Variant = {
     hidden: {
       x: 500,
@@ -53,16 +54,15 @@ const Login = (props) => {
   };
 
   useEffect(() => {
+    console.log(user);
+    if (user && user.status === 200) {
+      navigate("/completeProfile");
+    }
+  }, [userLogin]);
+  useEffect(() => {
     if (error) {
       console.log(error);
     }
-    // if (error) {
-    //   MySwal.fire({
-    //     icon: "error",
-    //     title: "Oops...",
-    //     text: "unauthorized, confirm Email First!",
-    //   });
-    // }
   }, [error]);
   return (
     <LoginFormStyle animate="show" initial="hidden" variants={Variant}>
