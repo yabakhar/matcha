@@ -2,10 +2,12 @@ import { useEffect, useReducer } from "react";
 
 const actionTypes = {
   firstStep: {
+    firstName: "UPDATE_FIRST_NAME",
+    lastName: "UPDATE_LAST_NAME",
     gender: "UPDATE_GENDER",
-    sexualPreferences: "UPDATE_SEXUAL_PREFERENCES",
     biography: "UPDATE_BIOGRAPHY",
     isComplete: "UPDATE_IS_COMPLETE",
+    birthdate: "UPDATE_BIRTH_DATE",
   },
   secondStep: {
     isComplete: "UPDATE_IS_COMPLETE",
@@ -15,15 +17,18 @@ const actionTypes = {
   },
   thirdStep: {
     isComplete: "UPDATE_IS_COMPLETE",
+    sexualPreferences: "UPDATE_SEXUAL_PREFERENCES",
     location: "UPDATE_LOCATION",
   },
 };
 
 const initialState = {
   firstStep: {
-    gender: 0,
-    sexualPreferences: null,
+    firstName: null,
+    lastName: null,
+    gender: null,
     biography: null,
+    birthdate: null,
     isComplete: false,
   },
   secondStep: {
@@ -34,24 +39,28 @@ const initialState = {
   },
   thirdStep: {
     isComplete: false,
+    sexualPreferences: null,
     location: { lat: 0, lng: 0 },
   },
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    /*****************First Step******************* */
     case actionTypes.firstStep.gender:
       return {
         ...state,
         firstStep: { ...state.firstStep, gender: action.gender },
       };
-    case actionTypes.firstStep.sexualPreferences:
+    case actionTypes.firstStep.firstName:
       return {
         ...state,
-        firstStep: {
-          ...state.firstStep,
-          sexualPreferences: action.sexualPreferences,
-        },
+        firstStep: { ...state.firstStep, firstName: action.firstName },
+      };
+    case actionTypes.firstStep.lastName:
+      return {
+        ...state,
+        firstStep: { ...state.firstStep, firstName: action.lastName },
       };
     case actionTypes.firstStep.biography:
       return {
@@ -63,6 +72,15 @@ const reducer = (state, action) => {
         ...state,
         firstStep: { ...state.firstStep, isComplete: action.isComplete },
       };
+    case actionTypes.firstStep.birthdate:
+      return {
+        ...state,
+        firstStep: {
+          ...state.firstStep,
+          birthdate: action.birthdate,
+        },
+      };
+    /*****************Second Step******************* */
     case actionTypes.secondStep.isComplete:
       return {
         ...state,
@@ -89,6 +107,7 @@ const reducer = (state, action) => {
           listOfInterests: action.listOfInterests,
         },
       };
+    /*****************Third Step******************* */
     case actionTypes.thirdStep.isComplete:
       return {
         ...state,
@@ -98,6 +117,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         thirdStep: { ...state.thirdStep, location: action.location },
+      };
+    case actionTypes.thirdStep.sexualPreferences:
+      return {
+        ...state,
+        thirdStep: {
+          ...state.thirdStep,
+          sexualPreferences: action.sexualPreferences,
+        },
       };
     default:
       return state;
