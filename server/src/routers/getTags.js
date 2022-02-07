@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const db = require('../database/database.js')
 const auth = require('../middlewares/auth');
-router.post("/gettag",auth,(req, res) => {
+router.post("/gettags",auth,(req, res) => {
     const { offset , row_count} = req.body
     db.query('SELECT tag FROM tags LIMIT ?,?', [offset,row_count], function (err, result, fields) {
         if (err) {

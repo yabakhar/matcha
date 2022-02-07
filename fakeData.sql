@@ -565,3 +565,53 @@ insert into photos (id, iduser, photo) values
 (169, 120, 'https://picsum.photos/1000'),
 (170, 121, 'https://picsum.photos/1000'),
 (171, 122, 'https://picsum.photos/1000');
+
+
+
+create table tags (
+	id INT,
+	iduser INT,
+	tag VARCHAR(25)
+);
+
+insert into tags (id, iduser, tag) values 
+(119, 103, 'love'),
+(122, 1, 'love'),
+(124, 3, 'love'),
+(125, 4, 'love'),
+(126, 501, 'love'),
+(128, 501, 'love'),
+(130, 501, 'love'),
+(132, 107, 'love'),
+(133, 107, 'love'),
+(136, 107, 'love'),
+(137, 107, 'love'),
+(139, 107, 'love'),
+(141, 21, 'love'),
+(142, 103, 'love'),
+(143, 24, 'bolles'),
+(144, 25, 'bolles'),
+(145, 23, 'bolles'),
+(146, 22, 'bolles'),
+(147, 20, 'bolles'),
+(148, 19, 'bolles'),
+(149, 18, 'bolles'),
+(150, 17, 'bolles'),
+(151, 15, 'bolles'),
+(152, 14, 'nhakoo'),
+(153, 13, 'nhakoo'),
+(154, 11, 'nhakoo'),
+(155, 11, 'nhakoo'),
+(156, 12, 'nhakoo'),
+(157, 10, 'nhakoo'),
+(158, 9, 'nhakoo'),
+(159, 8, 'love'),
+(160, 7, 'love'),
+(161, 16, 'love'),
+(163, 103, 'love'),
+(164, 115, 'love'),
+(167, 101, 'love'),
+(168, 119, 'love'),
+(169, 120, 'love'),
+(170, 121, 'love'),
+(171, 122, 'love');
