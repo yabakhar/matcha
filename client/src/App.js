@@ -4,7 +4,6 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "./utils/constants/Theme";
 import MainContent from "./views/index";
 import "./index.css";
-// import "./react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const App = () => {
   const [themeSelector, setThemeSelector] = useState(true);
