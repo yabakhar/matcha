@@ -1,5 +1,5 @@
 const auth = require('../routers/authentification.js')
-const getUsers = require('../routers/getAllUsers.js')
+const getUsers = require('../routers/getusers.js')
 const signup = require('../routers/signUp.js')
 const completeProfile = require('../routers/completeProfile.js')
 const validateEmail = require('../routers/validateEmail.js')
