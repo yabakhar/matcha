@@ -135,13 +135,13 @@ const reducer = (state, action) => {
 
 const CompleteProfile = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state]);
   return (
     <CompleteProfileContainer>
       <h1 className="title">Complete Profile</h1>
-      <Steper />
+      <Steper state={state} dispatch={dispatch} />
     </CompleteProfileContainer>
   );
 };
