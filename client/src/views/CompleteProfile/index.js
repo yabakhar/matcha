@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import Steper from "./Steper";
 import { CompleteProfileContainer } from "./CompleteProfile.Style";
 
-const actionTypes = {
+export const actionTypes = {
   firstStep: {
     firstName: "UPDATE_FIRST_NAME",
     lastName: "UPDATE_LAST_NAME",
@@ -26,11 +26,11 @@ const actionTypes = {
 
 const initialState = {
   firstStep: {
-    firstName: null,
-    lastName: null,
-    gender: null,
-    biography: null,
-    birthdate: null,
+    firstName: "",
+    lastName: "",
+    gender: "",
+    biography: "",
+    birthdate: "2000/01/01",
     isComplete: false,
   },
   secondStep: {
@@ -62,7 +62,7 @@ const reducer = (state, action) => {
     case actionTypes.firstStep.lastName:
       return {
         ...state,
-        firstStep: { ...state.firstStep, firstName: action.lastName },
+        firstStep: { ...state.firstStep, lastName: action.lastName },
       };
     case actionTypes.firstStep.biography:
       return {
