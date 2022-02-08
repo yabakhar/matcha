@@ -27,13 +27,28 @@ export const CompleteProfileContainer = styled.div`
   .steper {
     width: 100%;
     flex: 0 0 80%;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    &-steps {
+    &--steps {
       width: 100%;
-      flex: 0 0 10%;
+      height: 10%;
+    }
+    &--step {
+      width: 100%;
+      height: 90%;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      &__content {
+        width: 100%;
+        flex: 0 0 80%;
+        /* background-color: red; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &__buttons {
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
     }
   }
 `;

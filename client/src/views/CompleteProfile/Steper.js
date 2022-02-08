@@ -5,25 +5,28 @@ import { ColorlibConnector, ColorlibStepIcon } from "./Steper.Style";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import FirstStep from "./Steps/FirstStep";
+import SecondStep from "./Steps/SecondStep";
+import ThirdStep from "./Steps/ThirdStep";
 
 function getSteps() {
   return ["Complete Personnel Info", "Upload Photos", "get Localisation"];
 }
 
-function getStepContent(step) {
+function getStepContent(step, state, dispatch) {
   switch (step) {
     case 0:
-      return "Select campaign settings...";
+      return <FirstStep state={state} dispatch={dispatch} />;
     case 1:
-      return "What is an ad group anyways?";
+      return <SecondStep state={state} dispatch={dispatch} />;
     case 2:
-      return "This is the bit I really care about!";
+      return <ThirdStep state={state} dispatch={dispatch} />;
     default:
       return "Unknown step";
   }
 }
 
-const Steper = () => {
+const Steper = ({ state, dispatch }) => {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
   const handleNext = () => {
@@ -58,9 +61,9 @@ const Steper = () => {
         </div>
       ) : (
         <div className="steper--step">
-          <Typography className="steper--step__content">
-            {getStepContent(activeStep)}
-          </Typography>
+          <div className="steper--step__content">
+            {getStepContent(activeStep, state, dispatch)}
+          </div>
           <div className="steper--step__buttons">
             <Button
               className="steper--step__button"
