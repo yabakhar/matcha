@@ -5,7 +5,9 @@ router.get("/getusers", auth, (req, res) => {
     const {id} = req.body
     const { offset } = req.body
     const row_count = 10;
-    db.query(" SELECT * from users LIMIT ?, ?; SELECT COUNT(*) AS count FROM users;", [offset, row_count], function (err, result, fields) {
+    const page = (offset - 1) * row_count;
+    console.log(page);
+    db.query(" SELECT * from users LIMIT ?, ?; SELECT COUNT(*) AS count FROM users;", [page, row_count], function (err, result, fields) {
         if (err) {
             console.log(err);
             return res.status(400)
