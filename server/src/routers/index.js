@@ -7,6 +7,7 @@ const changePassword = require('./changePassword.js')
 const forgetpassword = require('./forgetpassward.js')
 const newPassword = require('./newPassword.js')
 const gettags = require('./getTags.js')
+const getsearshTag = require('./getsearshTag.js')
 const allRoutes = (app) => {
     const routes = {
         '/user': [
@@ -19,6 +20,7 @@ const allRoutes = (app) => {
             forgetpassword,
             newPassword,
             gettags,
+            getsearshTag,
         ],
     }
     Object.keys(routes).forEach((route) => {
