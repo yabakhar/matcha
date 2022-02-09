@@ -4,7 +4,7 @@ export const CompleteProfileContainer = styled.div`
   width: 90%;
   margin: auto;
   padding-top: 4rem;
-  height: 1200px;
+  min-height: 1000px;
   /* max-height: 120 */
   display: flex;
   align-items: center;
@@ -40,7 +40,7 @@ export const CompleteProfileContainer = styled.div`
     }
     &--step {
       width: 100%;
-      flex : 0 0 90%;
+      flex : 1 1 90%;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
@@ -49,6 +49,7 @@ export const CompleteProfileContainer = styled.div`
         flex: 0 0 60%;
       }
       &__buttons {
+        margin-top: 100px;
         width: 50%;
         display: flex;
         justify-content: space-between;

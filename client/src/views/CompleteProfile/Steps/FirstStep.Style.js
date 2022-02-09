@@ -4,33 +4,54 @@ export const StyledFirstStep = styled.div`
   width: 90%;
   textarea {
       resize: none;
-    }
-    .ant-input-textarea-show-count::after {
-      font-size: 1rem;
-    }
-  .text-area {
-    width: 100%;
+  }
+  .ant-input-textarea-show-count::after {
+    font-size: 1rem;
+  }
+  .tags-and-biography {
     display: flex;
-    flex-flow: row wrap;
-    align-items: center;
     justify-content: center;
-    
-    &__lab {
-      margin: 2rem 0 1rem 0;
-      flex : 0 0 70%;
-      color: ${(props) => props.theme.colors.tertiary};
-      font-size: 1.2rem;
-    }
-    .content--text-area {
-      flex : 0 0 100%;
-      height: 100px;
+    align-items: center;
+    flex-wrap: wrap;
+    &__tags {
+      flex : 0 0 50%;
+      min-width: 300px;
       display: flex;
-      justify-content: flex-end;
-      margin: 0rem 0 3rem 0;
-      .ant-input-textarea {
-        /* display: none; */
-        height: 100%;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      &--input{
+        font-size: 1.2rem;
+        display: flex;
+        margin: 1rem 0;
         width: 80%;
+        margin: 2rem 0 2rem 0;
+        .mui-input {
+          width: 100%;
+        }
+      }
+      &--container {
+        width: 80%;
+        display: flex;
+        gap : 20px;
+        flex-wrap: wrap;
+      }
+    }
+    &__biography {
+      flex : 0 0 50%;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      &--label {
+        width: 100%;
+        font-size: 1.2rem;
+        color: ${(props) => props.theme.colors.tertiary};
+        margin: 2rem 0 2rem 0;
+      }
+      &--textarea {
+        width: 100%;
+        height: 100px;
       }
     }
   }
@@ -46,7 +67,8 @@ export const StyledFirstStep = styled.div`
       align-items: center;
       flex-wrap: wrap;
       .name {
-        width: 200px;
+        width: 80%;
+        /* width: 00px; */
         /* min-width: 200px; */
         margin: 2rem 0 2rem 0;
       }
