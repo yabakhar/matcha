@@ -15,7 +15,10 @@ router.post("/getsearchtag", auth,(req, res) => {
         }
         else {
             if (result.length > 0)
-                return res.status(200).json({status:200,result:result[0]});
+            {
+                uniqueArray = a => [...new Set(a.map(o => JSON.stringify(o)))].map(s => JSON.parse(s));
+                return res.status(200).json({status:200,result:uniqueArray(result)});
+            }
             else
                 return res.status(200).json({status:200,result:""});
         }
