@@ -10,7 +10,7 @@ import SecondStep from "./Steps/SecondStep";
 import ThirdStep from "./Steps/ThirdStep";
 
 function getSteps() {
-  return ["Complete Personnel Info", "Upload Photos", "get Localisation"];
+  return ["Complete Personnel Info", "Upload Photos", "Localisation"];
 }
 
 function getStepContent(step, state, dispatch) {
@@ -30,7 +30,10 @@ const Steper = ({ state, dispatch }) => {
   const [activeStep, setActiveStep] = useState(0);
   const steps = getSteps();
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setActiveStep((prevActiveStep) => {
+      console.log(prevActiveStep);
+      return prevActiveStep + 1;
+    });
   };
 
   const handleBack = () => {
