@@ -33,7 +33,7 @@ export const StyledSecondStep = styled.div`
             width: 100%;
             transform: translate(-50%, -50%);
             font-size: 1.5rem;
-            color: #f6e58d;
+            color: #dff9fb;
         }
         .profile-pic {
             color: ${(props) => props.theme.colors.tertiary};

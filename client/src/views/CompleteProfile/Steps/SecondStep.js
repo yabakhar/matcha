@@ -110,7 +110,24 @@ const SecondStep = ({ state, dispatch }) => {
                                 )}
                                 <p
                                     onClick={() => {
+                                        let url = gallery[index].url;
                                         gallery.splice(index, 1);
+                                        if (profilePicture === url) {
+                                            dispatch({
+                                                type: actionTypes.secondStep
+                                                    .profilePicture,
+                                                profilePicture: "",
+                                            });
+                                            if (gallery.length > 0) {
+                                                dispatch({
+                                                    type: actionTypes.secondStep
+                                                        .profilePicture,
+                                                    profilePicture:
+                                                        gallery[0].url,
+                                                });
+                                                gallery[0].isProfilePicture = true;
+                                            }
+                                        }
                                         dispatch({
                                             type: actionTypes.secondStep
                                                 .gallery,
