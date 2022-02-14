@@ -1,5 +1,5 @@
 create table users (
-	id INT,
+	id int AUTO_INCREMENT PRIMARY KEY,
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
 	email VARCHAR(50),
@@ -521,7 +521,7 @@ insert into users (id, first_name, last_name, email, gender, tokenVerify, orient
 (501, 'Youssef', 'Abakhar', 'yabakhar@gmail.com', 'Male', "", 'Female', 'yabakhar', 'db37ed9a66bdd5c184c924c5461353ae', "hallla wallah",28,'https://robohash.org/quietnecessitatibus.png?size=500x500&set=set1', 490, 21.077764, 102.5197274, 0, '2001-04-24');
 
 create table photos (
-	id INT,
+	id int AUTO_INCREMENT PRIMARY KEY,
 	iduser INT,
 	photo VARCHAR(255)
 );
@@ -571,7 +571,7 @@ insert into photos (id, iduser, photo) values
 
 
 create table tags (
-	id INT,
+	id int AUTO_INCREMENT PRIMARY KEY,
 	iduser INT,
 	tag VARCHAR(25)
 );
