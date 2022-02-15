@@ -1,14 +1,14 @@
 import { StyledSecondStep } from "./SecondStepStyle";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import { actionTypes } from "../index";
-const SecondStep = ({ state, dispatch }) => {
+import { CompleteProfileActionTypes } from "../../../store/actions/actionTypes";
+const SecondStep = () => {
     const {
         secondStep: { gallery: gallery, profilePicture: profilePicture },
     } = state;
     const [clear, setClear] = useState("");
 
-    console.log(gallery);
+    // console.log(gallery);
     const handleChange = (e) => {
         let file = e.target.files[0];
         setClear(file);
@@ -17,7 +17,7 @@ const SecondStep = ({ state, dispatch }) => {
         reader.onloadend = function (e) {
             if (e.currentTarget.result.match("data:image.*")) {
                 dispatch({
-                    type: actionTypes.secondStep.gallery,
+                    type: CompleteProfileActionTypes.gallery,
                     gallery: [
                         ...gallery,
                         gallery.length == 0
@@ -33,7 +33,7 @@ const SecondStep = ({ state, dispatch }) => {
                 });
                 if (gallery.length == 0) {
                     dispatch({
-                        type: actionTypes.secondStep.profilePicture,
+                        type: CompleteProfileActionTypes.profilePicture,
                         profilePicture: e.currentTarget.result,
                     });
                 }
@@ -93,13 +93,11 @@ const SecondStep = ({ state, dispatch }) => {
                                                 }
                                             });
                                             dispatch({
-                                                type: actionTypes.secondStep
-                                                    .gallery,
+                                                type: CompleteProfileActionTypes.gallery,
                                                 gallery: [...gallery],
                                             });
                                             dispatch({
-                                                type: actionTypes.secondStep
-                                                    .profilePicture,
+                                                type: CompleteProfileActionTypes.profilePicture,
                                                 profilePicture:
                                                     gallery[index].url,
                                             });
@@ -114,14 +112,12 @@ const SecondStep = ({ state, dispatch }) => {
                                         gallery.splice(index, 1);
                                         if (profilePicture === url) {
                                             dispatch({
-                                                type: actionTypes.secondStep
-                                                    .profilePicture,
+                                                type: CompleteProfileActionTypes.profilePicture,
                                                 profilePicture: "",
                                             });
                                             if (gallery.length > 0) {
                                                 dispatch({
-                                                    type: actionTypes.secondStep
-                                                        .profilePicture,
+                                                    type: CompleteProfileActionTypes.profilePicture,
                                                     profilePicture:
                                                         gallery[0].url,
                                                 });
@@ -129,8 +125,7 @@ const SecondStep = ({ state, dispatch }) => {
                                             }
                                         }
                                         dispatch({
-                                            type: actionTypes.secondStep
-                                                .gallery,
+                                            type: CompleteProfileActionTypes.gallery,
                                             gallery: [...gallery],
                                         });
                                     }}

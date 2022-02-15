@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { ThirdStepStyle } from "./ThirdStep.Style";
 import CircularProgress from "@mui/material/CircularProgress";
-import {
-    MapContainer,
-    Marker,
-    Popup,
-    TileLayer,
-    useMapEvents,
-} from "react-leaflet";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
 
 function LocationMarker() {
     const [position, setPosition] = useState(null);
@@ -17,39 +11,30 @@ function LocationMarker() {
             console.log(e.latlng);
             setPosition(e.latlng);
         },
-        locationfound(e) {
-            console.log("location found:", location);
-            // console.log("bigola");
-            // setPosition(e.latlng);
-            // map.flyTo(e.latlng, map.getZoom());
-        },
     });
 
     return position === null ? null : <Marker position={position}></Marker>;
 }
 
 const ThirdStep = () => {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            setCoords([position.coords.latitude, position.coords.longitude]);
-            setLoad(false);
-        },
-        () => {
-            setError(true);
-            setLoad(false);
-        }
-    );
-    // const [position, setPosition] = useState(null);
     const [load, setLoad] = useState(true);
     const [error, setError] = useState(false);
     const [coords, setCoords] = useState([0, 0]);
     useEffect(() => {
-        console.log("coords", coords);
-    }, [coords]);
-
-    const addMarker = (e) => {
-        console.log(e.latlng);
-    };
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setCoords([
+                    position.coords.latitude,
+                    position.coords.longitude,
+                ]);
+                setLoad(false);
+            },
+            () => {
+                setError(true);
+                setLoad(false);
+            }
+        );
+    }, [navigator.geolocation]);
     return (
         <ThirdStepStyle>
             {!load ? (
@@ -59,23 +44,16 @@ const ThirdStep = () => {
                         center={coords}
                         zoom={13}
                     >
-                        <TileLayer
-                            // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
+                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                         <Marker position={coords}></Marker>
                     </MapContainer>
                 ) : (
                     <MapContainer
-                        onClick={addMarker}
                         className="map-container"
                         center={{ lat: 51.505, lng: -0.09 }}
                         zoom={13}
                     >
-                        <TileLayer
-                            // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
+                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                         <LocationMarker />
                     </MapContainer>
                 )

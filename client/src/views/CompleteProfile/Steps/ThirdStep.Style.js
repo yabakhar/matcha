@@ -14,7 +14,9 @@ export const ThirdStepStyle = styled.div`
         border-radius: 20px;
         min-width: 300px;
         width: 100%;
-        /* flex: 0 0 50%; */
         height: 500px;
+        a {
+            display: none;
+        }
     }
 `;

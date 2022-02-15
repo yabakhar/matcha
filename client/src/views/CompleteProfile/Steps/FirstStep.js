@@ -5,32 +5,35 @@ import { useEffect, useState } from "react";
 import { DatePicker } from "antd";
 import moment from "moment";
 import { Input } from "antd";
-import { actionTypes } from "../index";
+import { CompleteProfileActionTypes } from "../../../store/actions/actionTypes";
 import Chip from "@mui/material/Chip";
+import { useDispatch, useSelector } from "react-redux";
 
 const { TextArea } = Input;
 
-const FirstStep = ({ state, dispatch }) => {
+const FirstStep = () => {
+    const dispatch = useDispatch();
     const [value, setValue] = useState(1);
     const { RangePicker } = DatePicker;
     const handleDelete = () => {
         console.info("You clicked the delete icon.");
     };
     const dateFormat = "YYYY/MM/DD";
+    const state = useSelector((state) => state.completeProfile);
     const {
-        firstStep: {
-            firstName: firstName,
-            lastName: lastName,
-            gender: gender,
-            birthdate: birthdate,
-            biography: biography,
-        },
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        birthdate: birthdate,
+        biography: biography,
     } = state;
+    console.log(state);
     function onChange(date, dateString) {
         console.log(dateString);
     }
+    const [bsbs, setBsbs] = useState("");
     useEffect(() => {
-        console.log(state.firstStep);
+        console.log(firstName, lastName, gender);
     }, [state]);
     return (
         <StyledFirstStep>
@@ -40,7 +43,7 @@ const FirstStep = ({ state, dispatch }) => {
                         value={firstName}
                         onChange={(e) => {
                             dispatch({
-                                type: actionTypes.firstStep.firstName,
+                                type: CompleteProfileActionTypes.firstName,
                                 firstName: e.target.value,
                             });
                         }}
@@ -51,7 +54,7 @@ const FirstStep = ({ state, dispatch }) => {
                     <TextField
                         onChange={(e) => {
                             dispatch({
-                                type: actionTypes.firstStep.lastName,
+                                type: CompleteProfileActionTypes.lastName,
                                 lastName: e.target.value,
                             });
                         }}
@@ -69,7 +72,7 @@ const FirstStep = ({ state, dispatch }) => {
                             // onChange={onChange}
                             onChange={(e) => {
                                 dispatch({
-                                    type: actionTypes.firstStep.gender,
+                                    type: CompleteProfileActionTypes.gender,
                                     gender: e.target.value,
                                 });
                             }}
@@ -87,7 +90,7 @@ const FirstStep = ({ state, dispatch }) => {
                             format={dateFormat}
                             onChange={(data, dateString) => {
                                 dispatch({
-                                    type: actionTypes.firstStep.birthdate,
+                                    type: CompleteProfileActionTypes.birthdate,
                                     birthdate: dateString,
                                 });
                             }}
@@ -128,7 +131,7 @@ const FirstStep = ({ state, dispatch }) => {
                         maxLength={150}
                         onChange={(e) => {
                             dispatch({
-                                type: actionTypes.firstStep.biography,
+                                type: CompleteProfileActionTypes.biography,
                                 biography: e.target.value,
                             });
                         }}

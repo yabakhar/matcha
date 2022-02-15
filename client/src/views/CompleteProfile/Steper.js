@@ -13,20 +13,20 @@ function getSteps() {
     return ["Complete Personnel Info", "Upload Photos", "Localisation"];
 }
 
-function getStepContent(step, state, dispatch) {
+function getStepContent(step) {
     switch (step) {
         case 0:
-            return <FirstStep state={state} dispatch={dispatch} />;
-        case 1:
-            return <SecondStep state={state} dispatch={dispatch} />;
-        case 2:
-            return <ThirdStep state={state} dispatch={dispatch} />;
+            return <FirstStep />;
+        // case 1:
+        //     return <SecondStep />;
+        // case 2:
+        //     return <ThirdStep />;
         default:
             return "Unknown step";
     }
 }
 
-const Steper = ({ state, dispatch }) => {
+const Steper = () => {
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
     const handleNext = () => {
@@ -69,7 +69,7 @@ const Steper = ({ state, dispatch }) => {
             ) : (
                 <div className="steper--step">
                     <div className="steper--step__content">
-                        {getStepContent(activeStep, state, dispatch)}
+                        {getStepContent(activeStep)}
                     </div>
                     <div className="steper--step__buttons">
                         <Button
