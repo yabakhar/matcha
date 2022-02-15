@@ -10,84 +10,90 @@ import SecondStep from "./Steps/SecondStep";
 import ThirdStep from "./Steps/ThirdStep";
 
 function getSteps() {
-  return ["Complete Personnel Info", "Upload Photos", "Localisation"];
+    return ["Complete Personnel Info", "Upload Photos", "Localisation"];
 }
 
 function getStepContent(step, state, dispatch) {
-  switch (step) {
-    case 0:
-      return <FirstStep state={state} dispatch={dispatch} />;
-    case 1:
-      return <SecondStep state={state} dispatch={dispatch} />;
-    case 2:
-      return <ThirdStep state={state} dispatch={dispatch} />;
-    default:
-      return "Unknown step";
-  }
+    switch (step) {
+        case 0:
+            return <FirstStep state={state} dispatch={dispatch} />;
+        case 1:
+            return <SecondStep state={state} dispatch={dispatch} />;
+        case 2:
+            return <ThirdStep state={state} dispatch={dispatch} />;
+        default:
+            return "Unknown step";
+    }
 }
 
 const Steper = ({ state, dispatch }) => {
-  const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => {
-      console.log(prevActiveStep);
-      return prevActiveStep + 1;
-    });
-  };
+    const [activeStep, setActiveStep] = useState(0);
+    const steps = getSteps();
+    const handleNext = () => {
+        setActiveStep((prevActiveStep) => {
+            console.log(prevActiveStep);
+            return prevActiveStep + 1;
+        });
+    };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+    const handleBack = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-  return (
-    <div className="steper">
-      <Stepper
-        className="steper--steps"
-        alternativeLabel
-        activeStep={activeStep}
-        connector={<ColorlibConnector />}
-      >
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length ? (
-        <div>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset}>Reset</Button>
-        </div>
-      ) : (
-        <div className="steper--step">
-          <div className="steper--step__content">
-            {getStepContent(activeStep, state, dispatch)}
-          </div>
-          <div className="steper--step__buttons">
-            <Button
-              className="steper--step__button"
-              disabled={activeStep === 0}
-              onClick={handleBack}
+    const handleReset = () => {
+        setActiveStep(0);
+    };
+    return (
+        <div className="steper">
+            <Stepper
+                className="steper--steps"
+                alternativeLabel
+                activeStep={activeStep}
+                connector={<ColorlibConnector />}
             >
-              Back
-            </Button>
-            <Button
-              className="steper--step__button"
-              variant="contained"
-              color="primary"
-              onClick={handleNext}
-            >
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </div>
+                {steps.map((label) => (
+                    <Step key={label}>
+                        <StepLabel StepIconComponent={ColorlibStepIcon}>
+                            {label}
+                        </StepLabel>
+                    </Step>
+                ))}
+            </Stepper>
+            {activeStep === steps.length ? (
+                <div>
+                    <Typography>
+                        All steps completed - you&apos;re finished
+                    </Typography>
+                    <Button onClick={handleReset}>Reset</Button>
+                </div>
+            ) : (
+                <div className="steper--step">
+                    <div className="steper--step__content">
+                        {getStepContent(activeStep, state, dispatch)}
+                    </div>
+                    <div className="steper--step__buttons">
+                        <Button
+                            className="steper--step__button steper--step__button--back"
+                            disabled={activeStep === 0}
+                            onClick={handleBack}
+                        >
+                            Back
+                        </Button>
+                        <Button
+                            className="steper--step__button steper--step__button--next"
+                            variant="contained"
+                            color="primary"
+                            onClick={handleNext}
+                        >
+                            {activeStep === steps.length - 1
+                                ? "Finish"
+                                : "Next"}
+                        </Button>
+                    </div>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Steper;

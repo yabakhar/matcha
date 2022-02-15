@@ -24,6 +24,7 @@ export const StyledSecondStep = styled.div`
             background-color: #30336b;
             background-size: cover;
             background-repeat: no-repeat;
+            background-position: center;
             margin: 2rem 0 1rem 0;
         }
         .indice {

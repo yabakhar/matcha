@@ -1,20 +1,48 @@
 import styled from "styled-components";
 
 export const StyledFirstStep = styled.div`
-  width: 90%;
+  width: 100%;
+  /* min-height: 100%; */
+  min-height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   textarea {
       resize: none;
   }
   .ant-input-textarea-show-count::after {
     font-size: 1rem;
   }
+  .looking-for {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    flex: 0 0 10%;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap : 30px;
+    &__label {
+      /* width: ; */
+      flex: 0 0 100px;
+      /* color:  */
+      font-size: 1.2rem;
+      color: ${(props) => props.theme.colors.tertiary};
+      margin: 2rem 0 2rem 0;
+
+    }
+  }
   .tags-and-biography {
+    width: 100%;
+    flex: 1 1 45%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     &__tags {
-      flex : 0 0 50%;
+      flex : 1 1 50%;
       min-width: 300px;
       display: flex;
       flex-flow: column nowrap;
@@ -38,7 +66,7 @@ export const StyledFirstStep = styled.div`
       }
     }
     &__biography {
-      flex : 0 0 50%;
+      flex : 1 1 50%;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
@@ -56,29 +84,35 @@ export const StyledFirstStep = styled.div`
     }
   }
   .content--userinfo {
+    /* height: 100%; */
+    flex: 1 1 45%;
     width: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     flex-flow: row wrap;
     &__name {
+      height: 100%;
       flex: 1 1 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       flex-wrap: wrap;
       .name {
         width: 80%;
-        /* width: 00px; */
-        /* min-width: 200px; */
         margin: 2rem 0 2rem 0;
       }
     }
-    &__dateandgander {
-      flex: 0 0 50%;
+    &__dateandgender {
+      flex: 1 1 50%;
+      height: 100%;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       .gender {
-        width: 100%;
+        width: 80%;
         margin: 2rem 0 2rem 0;
         display: flex;
         align-items: center;
@@ -86,7 +120,7 @@ export const StyledFirstStep = styled.div`
         height: 80px;
         .lab {
           height: 100%;
-          flex: 0 0 20%;
+          flex: 1 1 20%;
           color: ${(props) => props.theme.colors.tertiary};
           display: flex;
           align-items: center;
@@ -95,20 +129,21 @@ export const StyledFirstStep = styled.div`
         }
         .radiopicker {
           display: flex;
-          flex: 0 0 80%;
+          flex: 1 1 80%;
           align-items: center;
           justify-content: space-between;
           span {
-            flex: 0 0 30%;
+            flex: 1 1 30%;
             gap: 5%;
             font-size: 1rem;
           }
         }
       }
       .date {
-        width: 100%;
+        width: 80%;
         margin: 2rem 0 2rem 0;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
         /* height: 80px; */
@@ -121,6 +156,7 @@ export const StyledFirstStep = styled.div`
       }
       .ant-picker{
         flex: 0 0 60%;
+        min-width: 150px;
       }
     }
   }

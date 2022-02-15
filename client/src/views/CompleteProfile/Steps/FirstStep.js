@@ -29,12 +29,6 @@ const FirstStep = ({ state, dispatch }) => {
     function onChange(date, dateString) {
         console.log(dateString);
     }
-    //firstName: "",
-    //lastName: "",
-    //gender: "",
-    //biography: "",
-    //birthdate: "",
-    // console.log(firstName);
     useEffect(() => {
         console.log(state.firstStep);
     }, [state]);
@@ -67,7 +61,7 @@ const FirstStep = ({ state, dispatch }) => {
                         variant="standard"
                     />
                 </div>
-                <div className="content--userinfo__dateandgander">
+                <div className="content--userinfo__dateandgender">
                     <div className="gender">
                         <div className="lab">Gender</div>
                         <Radio.Group
@@ -100,6 +94,14 @@ const FirstStep = ({ state, dispatch }) => {
                         />
                     </div>
                 </div>
+            </div>
+            <div className="looking-for">
+                <div className="looking-for__label">Looking for</div>
+                <Radio.Group onChange={onChange} value={value}>
+                    <Radio value={3}>Male</Radio>
+                    <Radio value={4}>Female</Radio>
+                    <Radio value={4}>Both</Radio>
+                </Radio.Group>
             </div>
             <div className="tags-and-biography">
                 <div className="tags-and-biography__tags">
