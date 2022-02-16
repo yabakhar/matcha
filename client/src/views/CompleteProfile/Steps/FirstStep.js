@@ -14,7 +14,7 @@ const { TextArea } = Input;
 const FirstStep = () => {
     const dispatch = useDispatch();
     const [value, setValue] = useState(1);
-    const { RangePicker } = DatePicker;
+    // const { RangePicker } = DatePicker;
     const handleDelete = () => {
         console.info("You clicked the delete icon.");
     };
@@ -26,15 +26,9 @@ const FirstStep = () => {
         gender: gender,
         birthdate: birthdate,
         biography: biography,
+        sexualPreferences: sexualPreferences,
     } = state;
-    console.log(state);
-    function onChange(date, dateString) {
-        console.log(dateString);
-    }
-    const [bsbs, setBsbs] = useState("");
-    useEffect(() => {
-        console.log(firstName, lastName, gender);
-    }, [state]);
+
     return (
         <StyledFirstStep>
             <div className="content--userinfo">
@@ -100,10 +94,18 @@ const FirstStep = () => {
             </div>
             <div className="looking-for">
                 <div className="looking-for__label">Looking for</div>
-                <Radio.Group onChange={onChange} value={value}>
-                    <Radio value={3}>Male</Radio>
-                    <Radio value={4}>Female</Radio>
-                    <Radio value={4}>Both</Radio>
+                <Radio.Group
+                    onChange={(e) => {
+                        dispatch({
+                            type: CompleteProfileActionTypes.sexualPreferences,
+                            sexualPreferences: e.target.value,
+                        });
+                    }}
+                    value={sexualPreferences}
+                >
+                    <Radio value={"male"}>Male</Radio>
+                    <Radio value={"female"}>Female</Radio>
+                    <Radio value={"Both"}>Both</Radio>
                 </Radio.Group>
             </div>
             <div className="tags-and-biography">

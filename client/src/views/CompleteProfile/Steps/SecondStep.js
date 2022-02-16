@@ -2,13 +2,13 @@ import { StyledSecondStep } from "./SecondStepStyle";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { CompleteProfileActionTypes } from "../../../store/actions/actionTypes";
+import { useSelector, useDispatch } from "react-redux";
 const SecondStep = () => {
-    const {
-        secondStep: { gallery: gallery, profilePicture: profilePicture },
-    } = state;
+    const state = useSelector((state) => state.completeProfile);
+    const { gallery: gallery, profilePicture: profilePicture } = state;
     const [clear, setClear] = useState("");
+    const dispatch = useDispatch();
 
-    // console.log(gallery);
     const handleChange = (e) => {
         let file = e.target.files[0];
         setClear(file);
