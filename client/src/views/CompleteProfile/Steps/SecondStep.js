@@ -16,6 +16,7 @@ const SecondStep = () => {
         reader.readAsDataURL(file);
         reader.onloadend = function (e) {
             if (e.currentTarget.result.match("data:image.*")) {
+                console.log(e.currentTarget.result);
                 dispatch({
                     type: CompleteProfileActionTypes.gallery,
                     gallery: [

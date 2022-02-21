@@ -8,18 +8,24 @@ import { Input } from "antd";
 import { CompleteProfileActionTypes } from "../../../store/actions/actionTypes";
 import Chip from "@mui/material/Chip";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { AutoComplete } from "antd";
 
 const { TextArea } = Input;
 
+const options = [
+    { value: "Burns Bay Road" },
+    { value: "Downing Street" },
+    { value: "Wall Street" },
+];
+
 const FirstStep = () => {
     const dispatch = useDispatch();
-    const [value, setValue] = useState(1);
-    // const { RangePicker } = DatePicker;
     const handleDelete = () => {
         console.info("You clicked the delete icon.");
     };
     const dateFormat = "YYYY/MM/DD";
-    const state = useSelector((state) => state.completeProfile);
+    const state = useSelector((state) => state);
     const {
         firstName: firstName,
         lastName: lastName,
@@ -27,8 +33,41 @@ const FirstStep = () => {
         birthdate: birthdate,
         biography: biography,
         sexualPreferences: sexualPreferences,
-    } = state;
+    } = state.completeProfile;
+    const token = state.userLogin.user.token;
 
+    const [value, setValue] = useState("");
+    const [options, setOptions] = useState([]);
+    const onSearch = (searchText) => {
+        // console.log(token);
+        if (token && searchText)
+            axios
+                .post(
+                    "http://localhost:1337/user/getsearchtag",
+                    {
+                        tag: searchText,
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                .then((res) => {
+                    console.log(res.data.result);
+                    setOptions([
+                        { value: "Burns Bay Road" },
+                        { value: "Downing Street" },
+                        { value: "Wall Street" },
+                    ]);
+                });
+    };
+    const onSelect = (data) => {
+        console.log("onSelect", data);
+    };
+    const onChange = (data) => {
+        setValue(data);
+    };
     return (
         <StyledFirstStep>
             <div className="content--userinfo">
@@ -111,10 +150,16 @@ const FirstStep = () => {
             <div className="tags-and-biography">
                 <div className="tags-and-biography__tags">
                     <div className="tags-and-biography__tags--input">
-                        <TextField
-                            className="mui-input"
-                            label="Tags"
-                            variant="standard"
+                        <AutoComplete
+                            value={value}
+                            options={options}
+                            style={{
+                                width: 200,
+                            }}
+                            onSelect={onSelect}
+                            onSearch={onSearch}
+                            onChange={onChange}
+                            placeholder="search for tags"
                         />
                     </div>
                     <div className="tags-and-biography__tags--container">
