@@ -3,15 +3,13 @@ import styled from "styled-components";
 export const CompleteProfileContainer = styled.div`
   width: 90%;
   margin: auto;
-  padding: 2rem;
   height: 1500px;
-  /* min-height: px; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   flex-flow: column nowrap;
   h1 {
-    flex : 1 1 10%;
+    flex : 0 0 10%;
     margin-bottom: 3rem;
     font-size: 2rem;
     background-image: linear-gradient(
@@ -29,11 +27,11 @@ export const CompleteProfileContainer = styled.div`
   .steper {
     width: 100%;
     max-width: 1200px;
-    flex: 1 1 90%;
+    flex: 0 0 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    min-width: 320px;
     &--steps {
       width: 100%;
       flex : 1 1 10%;
@@ -55,6 +53,7 @@ export const CompleteProfileContainer = styled.div`
         width: 50%;
         display: flex;
         justify-content: space-between;
+        padding-bottom: 4rem;
     }
     &__button {
       height: 50px;

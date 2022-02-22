@@ -3,14 +3,12 @@ import styled from "styled-components";
 export const StyledSecondStep = styled.div`
     width: 100%;
     height: 100%;
-    /* margin-top: 100px; */
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     .profile-picture {
         width: 200px;
-        /* height: 300px; */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -50,7 +48,6 @@ export const StyledSecondStep = styled.div`
         flex-wrap: wrap;
         width: 100%;
         .gallery {
-            /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
             width: 300px;
             height: 500px;
             margin: 1rem;

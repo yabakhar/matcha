@@ -34,7 +34,7 @@ const FirstStep = () => {
         biography: biography,
         sexualPreferences: sexualPreferences,
     } = state.completeProfile;
-    const token = state.userLogin.user.token;
+    const token = state.userLogin.user?.token;
 
     const [value, setValue] = useState("");
     const [options, setOptions] = useState([]);

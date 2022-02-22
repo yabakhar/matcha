@@ -4,11 +4,11 @@ import Step from "@material-ui/core/Step";
 import { ColorlibConnector, ColorlibStepIcon } from "./Steper.Style";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import FirstStep from "./Steps/FirstStep";
 import SecondStep from "./Steps/SecondStep";
 import ThirdStep from "./Steps/ThirdStep";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 function getSteps() {
     return ["Complete Personnel Info", "Upload Photos", "Localisation"];
@@ -55,18 +55,79 @@ const validateSecondStep = (state) => {
     return 0;
 };
 
+const completeProfile = (state) => {
+    const user = {
+        location: location,
+        sexualPreferences: sexualPreferences,
+        firstName: firstName,
+        lastName: lastName,
+        gender: gender,
+        biography: biography,
+        birthdate: birthdate,
+        avatar: profilePicture,
+        id: token,
+        llistOfInterests: listOfInterests,
+        gallery: gallery,
+    };
+};
+
 const Steper = () => {
     const [activeStep, setActiveStep] = useState(0);
     const steps = getSteps();
-    const state = useSelector((state) => state.completeProfile);
+    const state = useSelector((state) => state);
+    // const token = useSelector((state) => state.compl);
+    const completeProfile = state.completeProfile;
+    const token = state?.userLogin?.user?.token;
 
-    console.log(state);
+    // console.log(state);
     const handleNext = () => {
-        if (activeStep === 1 && validateSecondStep(state)) {
+        if (activeStep === 1 && validateSecondStep(completeProfile)) {
             setActiveStep(activeStep + 1);
-        } else if (activeStep === 0 && validateFirstStep(state))
+        } else if (activeStep === 0 && validateFirstStep(completeProfile))
             setActiveStep(activeStep + 1);
         else if (activeStep === 2) {
+            const user = {
+                location: completeProfile.location,
+                sexualPreferences: completeProfile.sexualPreferences,
+                firstName: completeProfile.firstName,
+                lastName: completeProfile.lastName,
+                gender: completeProfile.gender,
+                biography: completeProfile.biography,
+                birthdate: completeProfile.birthdate,
+                avatar: completeProfile.profilePicture,
+                llistOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
+                gallery: completeProfile.gallery,
+                id: token,
+            };
+            // const me = Object.create(user);
+            console.log(token);
+            axios
+                .post(
+                    "http://localhost:1337/user/completeProfile",
+                    {
+                        location: completeProfile.location,
+                        sexualPreferences: completeProfile.sexualPreferences,
+                        firstName: completeProfile.firstName,
+                        lastName: completeProfile.lastName,
+                        gender: completeProfile.gender,
+                        biography: completeProfile.biography,
+                        birthdate: completeProfile.birthdate,
+                        avatar: completeProfile.profilePicture,
+                        llistOfInterests: [
+                            { tag: "bigola" },
+                            { tag: "bigola2" },
+                        ],
+                        gallery: completeProfile.gallery,
+                        id: token,
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+                .then((res) => console.log(res))
+                .catch((err) => console.log(err.response));
             console.log("submit data");
         } else console.log("woow");
     };
