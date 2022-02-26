@@ -51,8 +51,8 @@ const validateFirstStep = (state) => {
 };
 const validateSecondStep = (state) => {
     const { gallery } = state;
-    if (gallery.length === 5) return 1;
-    return 0;
+    // if (gallery.length >= 1) return 1;
+    return 1;
 };
 
 const completeProfile = (state) => {
@@ -94,9 +94,11 @@ const Steper = () => {
                 gender: completeProfile.gender,
                 biography: completeProfile.biography,
                 birthdate: completeProfile.birthdate,
-                avatar: completeProfile.profilePicture,
-                llistOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
-                gallery: completeProfile.gallery,
+                avatar: "dfdf",
+                // avatar: completeProfile.profilePicture,
+                listOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
+                // gallery: completeProfile.gallery,
+                gallery: ["dfdf"],
                 id: token,
             };
             // const me = Object.create(user);
@@ -114,30 +116,11 @@ const Steper = () => {
                 id: token,
             });
             axios
-                .post(
-                    "http://localhost:1337/user/completeProfile",
-                    {
-                        location: completeProfile.location,
-                        sexualPreferences: completeProfile.sexualPreferences,
-                        firstName: completeProfile.firstName,
-                        lastName: completeProfile.lastName,
-                        gender: completeProfile.gender,
-                        biography: completeProfile.biography,
-                        birthdate: completeProfile.birthdate,
-                        listOfInterests: [
-                            { tag: "bigola" },
-                            { tag: "bigola2" },
-                        ],
-                        gallery: completeProfile.gallery,
-                        avatar: completeProfile.profilePicture,
-                        // avatar: "dfdkh",
+                .post("http://localhost:1337/user/completeProfile", user, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
                     },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
+                })
                 .then((res) => console.log(res))
                 .catch((err) => console.log(err.response));
             console.log("submit data");

@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 const userFromLocalStorage = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
-    : null;
+    : {};
 
 const initialState = {
     userLogin: userFromLocalStorage,
