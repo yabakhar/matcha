@@ -25,7 +25,7 @@ router.post("/completeProfile", auth, (req, res) => {
         photos.push([id, element]);
     });
     db.query(
-        "UPDATE users SET complete,first_name=?,last_name=?,gender=?,orientation=?,biography=?,lat=?,lon=?,birthdate=?,avatar=? WHERE id=?;INSERT INTO tags(iduser,tag) VALUES ?;INSERT INTO photos(iduser,photo) VALUES ?",
+        "UPDATE users SET complete=?,first_name=?,last_name=?,gender=?,orientation=?,biography=?,lat=?,lon=?,birthdate=?,avatar=? WHERE id=?;INSERT INTO tags(iduser,tag) VALUES ?;INSERT INTO photos(iduser,photo) VALUES ?",
         [
             1,
             firstName,
@@ -50,6 +50,7 @@ router.post("/completeProfile", auth, (req, res) => {
             else {
                 return res.status(200).json({
                     status: 200,
+                    result:result,
                     message: "ok"
                 });
             }
