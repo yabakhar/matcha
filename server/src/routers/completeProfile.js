@@ -50,7 +50,6 @@ router.post("/completeProfile", auth, (req, res) => {
             else {
                 return res.status(200).json({
                     status: 200,
-                    result:result,
                     message: "ok"
                 });
             }
