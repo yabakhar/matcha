@@ -4,14 +4,18 @@ import Content from "./Content";
 import NavBar from "../../components/NavBar/NavBar";
 import styled from "styled-components";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 const StyledProfile = styled.div`
     width: 90%;
     margin: 5rem auto;
-    height: 85rem;
+    height: auto;
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
-    padding: 4rem;
+    /* padding: 4rem; */
+    padding: 4rem 4rem 5rem 4rem;
 `;
 
 const StyledHeader = styled.header`
@@ -43,7 +47,6 @@ const StyledPicture = styled.div`
             left: 30%;
             width: 100%;
             height: 100%;
-            background: #f5f505;
             background-image: linear-gradient(
                 to bottom right,
                 #ff416c,
@@ -137,7 +140,7 @@ const StyledBioAndTags = styled.div`
         &-content {
             width: 100%;
             /* height: 100%; */
-            height: 60%;
+            height: 80%;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -151,7 +154,7 @@ const StyledBioAndTags = styled.div`
                 background-color: ${(props) => props.theme.colors.primary};
                 color: white;
                 border-radius: 20px;
-                margin: 0 1rem;
+                margin: 0.2rem 1rem;
                 &::before {
                     content: "#";
                 }
@@ -169,7 +172,7 @@ const StyledBioAndTags = styled.div`
 const StyledFooter = styled.footer`
     margin-top: 2rem;
     width: 100%;
-    height: 30rem;
+    /* height: 30rem; */
     /* background: blue; */
     border-radius: 20px;
     overflow: hidden;
@@ -183,7 +186,9 @@ const StyledFooter = styled.footer`
         background-color: white;
         /* background-image: ${(props) => props.theme.background.secondary}; */
         .label {
+            position: relative;
             font-size: 1.2rem;
+            cursor: pointer;
             padding: 1rem 8rem;
             color: white;
             z-index: 10;
@@ -191,17 +196,138 @@ const StyledFooter = styled.footer`
         }
         .selected {
             color: ${(props) => props.theme.colors.primary};
+            /* background: #fbe0d8; */
             border-bottom: 1px solid ${(props) => props.theme.colors.primary};
-            /* color: ${(props) => props.theme.colors.placeholder};
-            z-index: 1;
-            background-color: white;
-            border-top-left-radius: 30px;
-            border-top-right-radius: 30px; */
+        }
+        .underline {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            /* z-index: 50; */
+            /* background: var(--accent); */
+        }
+    }
+    .body {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: turquoise; */
+    }
+`;
+
+const images = [
+    {
+        url: "https://images.unsplash.com/photo-1604436122917-66306388da12?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1504276048855-f3d60e69632f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1556347961-f9521a88cb8a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzB8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1525337187502-a0dbdfb0286f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    },
+    {
+        url: "https://images.unsplash.com/photo-1507023490064-d1430fd147ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTB8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+    },
+];
+
+const StyledGelleryProfile = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 10px;
+    .card {
+        border: 2px solid black;
+        z-index: 100;
+        flex: 1 1 30%;
+        min-width: 300px;
+        height: 500px;
+        background-position: center;
+        background-size: cover;
+    }
+`;
+const StyledBody = styled(motion.div)`
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+`;
+
+const Gellery = () => {
+    return (
+        <StyledGelleryProfile>
+            {images.map((image) => {
+                return (
+                    <div
+                        className="card"
+                        style={{ backgroundImage: `url(${image.url})` }}
+                    />
+                );
+            })}
+        </StyledGelleryProfile>
+    );
+};
+
+const StyledMap = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    .map-container {
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        border: 2px solid ${(props) => props.theme.colors.primary};
+        border-radius: 20px;
+        min-width: 300px;
+        flex: 1 1 auto;
+        /* width: 100%; */
+        height: 500px;
+        a {
+            display: none;
         }
     }
 `;
 
+const Map = () => {
+    return (
+        <StyledMap>
+            <MapContainer
+                className="map-container"
+                center={{ lat: 51.505, lng: -0.09 }}
+                zoom={13}
+            >
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <Marker position={{ lat: 51.505, lng: -0.09 }}></Marker>
+            </MapContainer>
+        </StyledMap>
+    );
+};
+
+const StyledHistory = styled.div`
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const History = () => {
+    return <StyledHistory>History</StyledHistory>;
+};
+const tabs = [
+    { label: "Gallery", component: <Gellery /> },
+    { label: "Map", component: <Map /> },
+    { label: "History", component: <History /> },
+];
+
 const Profile = () => {
+    const [selectedTab, setSelectedTab] = useState(0);
     return (
         <>
             <NavBar />
@@ -214,7 +340,7 @@ const Profile = () => {
                             <div
                                 className="background"
                                 style={{
-                                    backgroundImage: `url("https://images.unsplash.com/photo-1645839449203-506aa9c82f8b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60")`,
+                                    backgroundImage: `url("https://images.unsplash.com/photo-1516522973472-f009f23bba59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")`,
                                 }}
                             />
                         </div>
@@ -225,10 +351,16 @@ const Profile = () => {
                             <div className="value">
                                 <div className="starts">
                                     {[1, 2, 3].map((item, index) => (
-                                        <AiFillStar className="icone fill" />
+                                        <AiFillStar
+                                            key={index}
+                                            className="icone fill"
+                                        />
                                     ))}
                                     {[1, 2].map((item, index) => (
-                                        <AiOutlineStar className="icone" />
+                                        <AiOutlineStar
+                                            key={index}
+                                            className="icone"
+                                        />
                                     ))}
                                 </div>
                             </div>
@@ -281,13 +413,50 @@ const Profile = () => {
                     </div>
                 </StyledBioAndTags>
                 <StyledFooter>
-                    <div className="head">
-                        {/* <div className="selected"></div> */}
-                        <div className="label">Gallery</div>
-                        <div className="label selected">Map</div>
-                        <div className="label">History</div>
-                    </div>
-                    <div className="body"></div>
+                    <StyledFooter>
+                        <div className="head">
+                            {/* <div className="selected"></div> */}
+                            {tabs.map((item, index) => (
+                                <div
+                                    onClick={() => {
+                                        setSelectedTab(index);
+                                        console.log(item);
+                                    }}
+                                    key={index}
+                                    className={
+                                        index === selectedTab
+                                            ? "label selected"
+                                            : "label"
+                                    }
+                                >
+                                    {item.label}
+                                    {index === selectedTab ? (
+                                        <motion.div
+                                            className="underline"
+                                            layoutId="underline"
+                                        />
+                                    ) : null}
+                                </div>
+                            ))}
+                            {/* <div className="label">Gallery</div> */}
+                            {/* <div className="label selected">Map</div> */}
+                            {/* <div className="label">History</div> */}
+                        </div>
+                        <div className="body">
+                            <AnimatePresence exitBeforeEnter>
+                                <StyledBody
+                                    key={selectedTab}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.15 }}
+                                >
+                                    {tabs[selectedTab].component}
+                                    {/* {selectedTab ? selectedTab.icon : "😋"} */}
+                                </StyledBody>
+                            </AnimatePresence>
+                        </div>
+                    </StyledFooter>
                 </StyledFooter>
             </StyledProfile>
         </>
