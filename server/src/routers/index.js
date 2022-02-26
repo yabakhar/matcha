@@ -1,5 +1,5 @@
 const auth = require('../routers/authentification.js')
-const getUsers = require('../routers/getusers.js')
+const searshuser = require('./searshUser.js')
 const signup = require('../routers/signUp.js')
 const completeProfile = require('../routers/completeProfile.js')
 const validateEmail = require('../routers/validateEmail.js')
@@ -12,7 +12,7 @@ const allRoutes = (app) => {
     const routes = {
         '/user': [
             auth,
-            getUsers,
+            searshuser,
             signup,
             completeProfile,
             validateEmail,
