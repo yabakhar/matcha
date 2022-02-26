@@ -16,5 +16,5 @@ app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:500
 allRoutes(app)
 
 app.listen(port, () => {
-  console.log(`yabakhar app listening at http://localhost:${port}`)
+  console.log(`yabakhar app listening at http://192.168.99.104:${port}`)
 });
