@@ -57,10 +57,3 @@ router.post("/completeProfile", auth, (req, res) => {
     );
 });
 module.exports = router;
-//
-//
-//;INSERT INTO photos(iduser,photo) VALUES ?
-/*
-calculate age
-*/
-// TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) AS age

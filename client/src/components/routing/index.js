@@ -10,7 +10,7 @@ import NavBar from "../NavBar/NavBar";
 const Router = () => {
     return (
         <BrowserRouter>
-            <NavBar />
+            {/* <NavBar /> */}
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/validateAccount" element={<ComfirmAccount />} />

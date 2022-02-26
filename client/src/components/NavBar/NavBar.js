@@ -24,7 +24,9 @@ const StyledNavBar = styled.div`
     align-items: center;
     flex-wrap: wrap;
     border-bottom: 1px solid #ededed;
-    background-color: #ededed;
+    background-color: #f7f7f7;
+    /* background-color: #f8f3d4; */
+    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
     /* background-color: turquoise; */
     .navbar-logo {
         margin-left: 4rem;

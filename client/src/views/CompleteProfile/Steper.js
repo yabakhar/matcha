@@ -100,7 +100,19 @@ const Steper = () => {
                 id: token,
             };
             // const me = Object.create(user);
-            console.log(token);
+            console.log({
+                location: completeProfile.location,
+                sexualPreferences: completeProfile.sexualPreferences,
+                firstName: completeProfile.firstName,
+                lastName: completeProfile.lastName,
+                gender: completeProfile.gender,
+                biography: completeProfile.biography,
+                birthdate: completeProfile.birthdate,
+                llistOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
+                gallery: completeProfile.gallery,
+                avatar: completeProfile.profilePicture,
+                id: token,
+            });
             axios
                 .post(
                     "http://localhost:1337/user/completeProfile",
@@ -112,13 +124,13 @@ const Steper = () => {
                         gender: completeProfile.gender,
                         biography: completeProfile.biography,
                         birthdate: completeProfile.birthdate,
-                        avatar: completeProfile.profilePicture,
-                        llistOfInterests: [
+                        listOfInterests: [
                             { tag: "bigola" },
                             { tag: "bigola2" },
                         ],
                         gallery: completeProfile.gallery,
-                        id: token,
+                        avatar: completeProfile.profilePicture,
+                        // avatar: "dfdkh",
                     },
                     {
                         headers: {
