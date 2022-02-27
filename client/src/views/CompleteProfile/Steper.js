@@ -116,7 +116,19 @@ const Steper = () => {
                 id: token,
             });
             axios
-                .post("http://localhost:1337/user/completeProfile", user, {
+                .post("http://localhost:1337/user/completeProfile", {
+                    location: completeProfile.location,
+                    sexualPreferences: completeProfile.sexualPreferences,
+                    firstName: completeProfile.firstName,
+                    lastName: completeProfile.lastName,
+                    gender: completeProfile.gender,
+                    biography: completeProfile.biography,
+                    birthdate: completeProfile.birthdate,
+                    llistOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
+                    gallery: completeProfile.gallery,
+                    avatar: completeProfile.profilePicture,
+                    id: token,
+                }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
