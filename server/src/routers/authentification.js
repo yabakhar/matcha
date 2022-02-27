@@ -11,7 +11,7 @@ router.post("/authentification", (req, res) => {
                 .json(
                     {
                         status: 400,
-                        message: "Database error",
+                        message: `Database error ${err}`,
                     }
                 )
         }
