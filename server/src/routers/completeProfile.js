@@ -2,8 +2,8 @@ const router = require("express").Router();
 const db = require("../database/database.js");
 const auth = require("../middlewares/auth");
 const base64toimg = require("../helpers/base64toimg");
-var avatar_profile ;
-var galerry ;
+var avatar_profile;
+var elem;
 router.post("/completeProfile", auth, (req, res) => {
     const {
         location,
@@ -24,15 +24,15 @@ router.post("/completeProfile", auth, (req, res) => {
         tags.push([id, element]);
     });
     gallery.forEach((element) => {
-        galerry = base64toimg.base64toimg(element)
-        if (galerry === "error")
+        elem = base64toimg.base64toimg(element)
+        if (elem === "error")
         {
             return res.status(400).json({
                 status: 400,
                 message: "parsing image error"
             });
         }
-        photos.push([id, ]);
+        photos.push([id, elem]);
     });
     avatar_profile = base64toimg.base64toimg(avatar);
     if (avatar_profile === "error")
