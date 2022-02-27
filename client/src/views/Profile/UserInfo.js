@@ -5,24 +5,33 @@ const StyledHeader = styled.header`
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    gap: 2rem;
     padding: 3rem;
 `;
 
 const StyledPicture = styled.div`
     flex: 1 1 auto;
-    position: relative;
-    height: 22rem;
-    min-width: 22rem;
-    margin-right: 2rem;
+    min-width: 300px;
+    height: 15rem;
+    /* display: none; */
+    /* position: relative; */
+    /* height: 100%; */
+    /* height: 22rem; */
+    /* min-width: 22rem; */
+    /* margin-right: 2rem; */
+    padding: 0.5rem;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
     .pic-container {
-        width: 22rem;
-        height: 100%;
+        width: 12em;
+        height: 12em;
         border-radius: 50%;
         background: white;
         position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        /* left: 50%; */
+        /* top: 50%; */
+        /* transform: translate(-50%, -50%); */
         overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
             rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -63,6 +72,14 @@ const StyledPicture = styled.div`
             background-repeat: no-repeat;
         }
     }
+    @media (max-width: 768px) {
+        /* width: 15rem !important; */
+        /* height: 15rem !important; */
+    }
+    @media (max-width: 350px) {
+        /* width: 5rem !important; */
+        /* height: 5rem !important; */
+    }
 `;
 
 const StyledInfo = styled.div`
@@ -95,6 +112,27 @@ const StyledInfo = styled.div`
                 color: ${(props) => props.theme.colors.primary};
             }
         }
+    }
+    @media (max-width: 750px) {
+        .item {
+            /* padding: 0 !important; */
+            & > * {
+                font-size: 1rem !important;
+            }
+        }
+        .starts {
+            .icone {
+                font-size: 1rem !important;
+                margin: 0 0.1rem !important;
+            }
+            .fill {
+                color: ${(props) => props.theme.colors.primary};
+            }
+        }
+    }
+
+        /* width: 5rem !important; */
+        /* height: 5rem !important; */
     }
 `;
 const UserInfo = () => {

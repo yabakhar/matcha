@@ -14,6 +14,11 @@ const StyledProfile = styled.div`
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
     padding: 4rem 4rem 5rem 4rem;
+    z-index: 50;
+    @media (max-width: 750px) {
+        width: 100% !important;
+        padding: 1rem !important;
+    }
 `;
 
 const StyledBioAndTags = styled.div`

@@ -7,7 +7,7 @@ import Router from "./components/routing/index";
 
 const StyledApp = styled.div`
     padding-bottom: 100px;
-    background-color: #fffafb;
+    /* background-color: #fffafb; */
 `;
 
 const App = () => {
