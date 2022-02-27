@@ -3,6 +3,7 @@ const db = require("../database/database.js");
 const auth = require("../middlewares/auth");
 const base64toimg = require("../helpers/base64toimg");
 var avatar_profile ;
+var galerry ;
 router.post("/completeProfile", auth, (req, res) => {
     const {
         location,
@@ -23,9 +24,24 @@ router.post("/completeProfile", auth, (req, res) => {
         tags.push([id, element]);
     });
     gallery.forEach((element) => {
-        photos.push([id, base64toimg.base64toimg(element)]);
+        galerry = base64toimg.base64toimg(element)
+        if (galerry === "error")
+        {
+            return res.status(400).json({
+                status: 400,
+                message: "parsing image error"
+            });
+        }
+        photos.push([id, ]);
     });
     avatar_profile = base64toimg.base64toimg(avatar);
+    if (avatar_profile === "error")
+    {
+        return res.status(400).json({
+            status: 400,
+            message: "parsing image error"
+        });
+    }
     db.query(
         "UPDATE users SET complete=?,first_name=?,last_name=?,gender=?,orientation=?,biography=?,lat=?,lon=?,birthdate=?,avatar=? WHERE id=?;INSERT INTO tags(iduser,tag) VALUES ?;INSERT INTO photos(iduser,photo) VALUES ?",
         [
