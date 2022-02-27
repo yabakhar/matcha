@@ -100,25 +100,6 @@ const Steper = () => {
                 id: token,
             });
             axios
-<<<<<<< HEAD
-                .post(
-                    "http://localhost:1337/user/completeProfile",
-                    {
-                        location: completeProfile.location,
-                        sexualPreferences: completeProfile.sexualPreferences,
-                        firstName: completeProfile.firstName,
-                        lastName: completeProfile.lastName,
-                        gender: completeProfile.gender,
-                        biography: completeProfile.biography,
-                        birthdate: completeProfile.birthdate,
-                        llistOfInterests: [
-                            { tag: "bigola" },
-                            { tag: "bigola2" },
-                        ],
-                        gallery: completeProfile.gallery,
-                        avatar: completeProfile.profilePicture,
-                        id: token,
-=======
                 .post("http://localhost:1337/user/completeProfile", {
                     location: completeProfile.location,
                     sexualPreferences: completeProfile.sexualPreferences,
@@ -134,7 +115,6 @@ const Steper = () => {
                 }, {
                     headers: {
                         Authorization: `Bearer ${token}`,
->>>>>>> 430ae16e2287a2d6f85aa2df520e3c32672e5eb9
                     },
                     {
                         headers: {
