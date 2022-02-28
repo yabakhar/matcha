@@ -29,7 +29,8 @@ router.post("/authentification", (req, res) => {
                     const id = result[0].id;
                     const lon = result[0].lon;
                     const lat = result[0].lat;
-                    const accesstoken = jwt.sign({ id,lon,lat }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+                    const username = result[0].username;
+                    const accesstoken = jwt.sign({ id,lon,lat,username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
                     if (result[0].tokenVerify === '') {
                         return res.status(200).json({
                             status: 200,
