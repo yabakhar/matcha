@@ -86,22 +86,6 @@ const Steper = () => {
         } else if (activeStep === 0 && validateFirstStep(completeProfile))
             setActiveStep(activeStep + 1);
         else if (activeStep === 2) {
-            const user = {
-                location: completeProfile.location,
-                sexualPreferences: completeProfile.sexualPreferences,
-                firstName: completeProfile.firstName,
-                lastName: completeProfile.lastName,
-                gender: completeProfile.gender,
-                biography: completeProfile.biography,
-                birthdate: completeProfile.birthdate,
-                avatar: "dfdf",
-                // avatar: completeProfile.profilePicture,
-                listOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
-                // gallery: completeProfile.gallery,
-                gallery: ["dfdf"],
-                id: token,
-            };
-            // const me = Object.create(user);
             console.log({
                 location: completeProfile.location,
                 sexualPreferences: completeProfile.sexualPreferences,
@@ -110,29 +94,36 @@ const Steper = () => {
                 gender: completeProfile.gender,
                 biography: completeProfile.biography,
                 birthdate: completeProfile.birthdate,
-                llistOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
+                llistOfInterests: ["bigola", "bigola2"],
                 gallery: completeProfile.gallery,
                 avatar: completeProfile.profilePicture,
                 id: token,
             });
             axios
-                .post("http://localhost:1337/user/completeProfile", {
-                    location: completeProfile.location,
-                    sexualPreferences: completeProfile.sexualPreferences,
-                    firstName: completeProfile.firstName,
-                    lastName: completeProfile.lastName,
-                    gender: completeProfile.gender,
-                    biography: completeProfile.biography,
-                    birthdate: completeProfile.birthdate,
-                    llistOfInterests: [{ tag: "bigola" }, { tag: "bigola2" }],
-                    gallery: completeProfile.gallery,
-                    avatar: completeProfile.profilePicture,
-                    id: token,
-                }, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
+                .post(
+                    "http://localhost:1337/user/completeProfile",
+                    {
+                        location: completeProfile.location,
+                        sexualPreferences: completeProfile.sexualPreferences,
+                        firstName: completeProfile.firstName,
+                        lastName: completeProfile.lastName,
+                        gender: completeProfile.gender,
+                        biography: completeProfile.biography,
+                        birthdate: completeProfile.birthdate,
+                        llistOfInterests: [
+                            { tag: "bigola" },
+                            { tag: "bigola2" },
+                        ],
+                        gallery: completeProfile.gallery,
+                        avatar: completeProfile.profilePicture,
+                        id: token,
                     },
-                })
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
                 .then((res) => console.log(res))
                 .catch((err) => console.log(err.response));
             console.log("submit data");

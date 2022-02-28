@@ -1,136 +1,42 @@
-import { ProfileContainer } from "./Profile.style";
-import LeftSide from "./LeftSide";
-import Content from "./Content";
 import NavBar from "../../components/NavBar/NavBar";
 import styled from "styled-components";
-import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import UserInfo from "./UserInfo";
 
 const StyledProfile = styled.div`
     width: 90%;
+    max-width: 1600px;
     margin: 5rem auto;
     height: auto;
+    min-width: 350px;
     border-radius: 20px;
     box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;
-    /* padding: 4rem; */
     padding: 4rem 4rem 5rem 4rem;
-`;
-
-const StyledHeader = styled.header`
-    width: 100%;
-    /* height: 30rem; */
-    /* background-color: blue; */
-    display: flex;
-    flex-flow: row wrap;
-`;
-
-const StyledPicture = styled.div`
-    flex: 1 1 auto;
-    position: relative;
-    /* margin-left: 4rem; */
-    .pic-container {
-        width: 22rem;
-        height: 22rem;
-        border-radius: 50%;
-        background: white;
-        position: absolute;
-        left: 25%;
-        top: 50%;
-        transform: translate(-25%, -50%);
-        overflow: hidden;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-            rgba(0, 0, 0, 0.22) 0px 10px 10px;
-        .left-cercle {
-            position: absolute;
-            left: 30%;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(
-                to bottom right,
-                #ff416c,
-                #ff4b2b
-            );
-        }
-        .right-cercle {
-            position: absolute;
-            left: -55%;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(
-                to bottom right,
-                #ff416c,
-                #ff4b2b
-            );
-        }
-        .background {
-            width: 98%;
-            height: 98%;
-            border-radius: 50%;
-            background-color: black;
-            z-index: 2;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    }
-`;
-
-const StyledInfo = styled.div`
-    flex: 0 0 65%;
-    min-width: 500px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    padding: 2rem 4rem;
-    .item {
-        padding: 1rem;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #f8eded;
-        & > * {
-            font-size: 1.1rem;
-            color: ${(props) => props.theme.colors.text};
-        }
-        .label {
-        }
-        .starts {
-            .icone {
-                font-size: 1.5rem;
-                margin: 0 0.2rem;
-            }
-            .fill {
-                color: ${(props) => props.theme.colors.primary};
-            }
-        }
+    z-index: 50;
+    @media (max-width: 750px) {
+        width: 100% !important;
+        padding: 1rem !important;
     }
 `;
 
 const StyledBioAndTags = styled.div`
     width: 100%;
-    margin-top: 2rem;
-    height: 14rem;
-    /* background-color: ${(props) => props.theme.colors.primary}; */
+    margin: 3rem 0;
+    height: auto;
     display: flex;
-    flex-flow: row;
-    gap: 50px;
+    flex-flow: row wrap;
+    gap: 20px;
     .container {
-        flex: 1 1 50%;
-        /* min-width: 300px; */
-        height: 100%;
+        flex: 1 1 40%;
+        min-width: 300px;
         background-color: #f9f9f9;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px,
             rgba(0, 0, 0, 0.1) 0px 10px 10px;
         border-radius: 20px;
         transition: all 0.2s ease-in-out;
         &-header {
-            /* height: 2rem; */
             font-size: 1rem;
             text-align: center;
             padding: 0.5rem;
@@ -138,19 +44,20 @@ const StyledBioAndTags = styled.div`
             border-bottom: 1px solid #f8eded;
         }
         &-content {
-            width: 100%;
-            /* height: 100%; */
-            height: 80%;
+            /* width: 100%; */
+            flex: 1 1 50%;
+            min-width: 300px;
+            height: auto;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 1rem;
             padding: 1rem;
             overflow: hidden;
             .tag {
                 padding: 0.5rem 1.5rem;
-                font-size: 0.8rem;
+                font-size: 1rem;
                 background-color: ${(props) => props.theme.colors.primary};
                 color: white;
                 border-radius: 20px;
@@ -170,33 +77,33 @@ const StyledBioAndTags = styled.div`
 `;
 
 const StyledFooter = styled.footer`
-    margin-top: 2rem;
     width: 100%;
-    /* height: 30rem; */
-    /* background: blue; */
+    min-width: 320px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 14px 28px,
         rgba(0, 0, 0, 0.1) 0px 10px 10px;
     .head {
-        height: 5rem;
+        min-height: 5rem;
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
+        gap: 20px;
         align-items: end;
         background-color: white;
-        /* background-image: ${(props) => props.theme.background.secondary}; */
         .label {
+            flex: 1 1 auto;
             position: relative;
             font-size: 1.2rem;
             cursor: pointer;
-            padding: 1rem 8rem;
+            padding: 1rem 2rem;
             color: white;
+            text-align: center;
             z-index: 10;
             color: ${(props) => props.theme.colors.placeholder};
         }
         .selected {
             color: ${(props) => props.theme.colors.primary};
-            /* background: #fbe0d8; */
             border-bottom: 1px solid ${(props) => props.theme.colors.primary};
         }
         .underline {
@@ -205,8 +112,6 @@ const StyledFooter = styled.footer`
             left: 0;
             right: 0;
             height: 1px;
-            /* z-index: 50; */
-            /* background: var(--accent); */
         }
     }
     .body {
@@ -215,7 +120,6 @@ const StyledFooter = styled.footer`
         display: flex;
         align-items: center;
         justify-content: center;
-        /* background-color: turquoise; */
     }
 `;
 
@@ -239,17 +143,18 @@ const images = [
 
 const StyledGelleryProfile = styled.div`
     width: 100%;
-    height: 100%;
+    min-height: 80rem;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     gap: 10px;
+    align-items: center;
     .card {
         border: 2px solid black;
         z-index: 100;
         flex: 1 1 30%;
         min-width: 300px;
-        height: 500px;
+        height: 40rem;
         background-position: center;
         background-size: cover;
     }
@@ -263,9 +168,10 @@ const StyledBody = styled(motion.div)`
 const Gellery = () => {
     return (
         <StyledGelleryProfile>
-            {images.map((image) => {
+            {images.map((image, index) => {
                 return (
                     <div
+                        key={index}
                         className="card"
                         style={{ backgroundImage: `url(${image.url})` }}
                     />
@@ -277,17 +183,17 @@ const Gellery = () => {
 
 const StyledMap = styled.div`
     width: 100%;
-    height: 100%;
+    height: 80rem;
     display: flex;
     justify-content: center;
+    align-items: center;
     .map-container {
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
         border: 2px solid ${(props) => props.theme.colors.primary};
         border-radius: 20px;
         min-width: 300px;
         flex: 1 1 auto;
-        /* width: 100%; */
-        height: 500px;
+        height: 41rem;
         a {
             display: none;
         }
@@ -311,7 +217,7 @@ const Map = () => {
 
 const StyledHistory = styled.div`
     width: 100%;
-    height: 20rem;
+    height: 80rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -321,8 +227,8 @@ const History = () => {
     return <StyledHistory>History</StyledHistory>;
 };
 const tabs = [
-    { label: "Gallery", component: <Gellery /> },
     { label: "Map", component: <Map /> },
+    { label: "Gallery", component: <Gellery /> },
     { label: "History", component: <History /> },
 ];
 
@@ -332,61 +238,7 @@ const Profile = () => {
         <>
             <NavBar />
             <StyledProfile>
-                <StyledHeader>
-                    <StyledPicture>
-                        <div className="pic-container">
-                            <div className="left-cercle" />
-                            <div className="right-cercle" />
-                            <div
-                                className="background"
-                                style={{
-                                    backgroundImage: `url("https://images.unsplash.com/photo-1516522973472-f009f23bba59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")`,
-                                }}
-                            />
-                        </div>
-                    </StyledPicture>
-                    <StyledInfo>
-                        <div className="item">
-                            <div className="label">Fame Rating</div>
-                            <div className="value">
-                                <div className="starts">
-                                    {[1, 2, 3].map((item, index) => (
-                                        <AiFillStar
-                                            key={index}
-                                            className="icone fill"
-                                        />
-                                    ))}
-                                    {[1, 2].map((item, index) => (
-                                        <AiOutlineStar
-                                            key={index}
-                                            className="icone"
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item">
-                            <div className="label">User Name</div>
-                            <div className="value">Farwila</div>
-                        </div>
-                        <div className="item">
-                            <div className="label">Full Name</div>
-                            <div className="value">Bigola Lfarwila</div>
-                        </div>
-                        <div className="item">
-                            <div className="label">Gender</div>
-                            <div className="value">Male</div>
-                        </div>
-                        <div className="item">
-                            <div className="label">Age</div>
-                            <div className="value">30</div>
-                        </div>
-                        <div className="item">
-                            <div className="label">Sexual Preferences</div>
-                            <div className="value">Female</div>
-                        </div>
-                    </StyledInfo>
-                </StyledHeader>
+                <UserInfo />
                 <StyledBioAndTags>
                     <div className="container">
                         <div className="container-header">
@@ -438,9 +290,6 @@ const Profile = () => {
                                     ) : null}
                                 </div>
                             ))}
-                            {/* <div className="label">Gallery</div> */}
-                            {/* <div className="label selected">Map</div> */}
-                            {/* <div className="label">History</div> */}
                         </div>
                         <div className="body">
                             <AnimatePresence exitBeforeEnter>
@@ -452,7 +301,6 @@ const Profile = () => {
                                     transition={{ duration: 0.15 }}
                                 >
                                     {tabs[selectedTab].component}
-                                    {/* {selectedTab ? selectedTab.icon : "😋"} */}
                                 </StyledBody>
                             </AnimatePresence>
                         </div>
@@ -464,25 +312,3 @@ const Profile = () => {
 };
 
 export default Profile;
-{
-    /* <ProfileContainer>
-    <LeftSide />
-    <Content />
-</ProfileContainer>; */
-}
-
-{
-    /* <div className="user-info-rating"></div> */
-}
-{
-    /* <div className="user-info-username"></div> */
-}
-{
-    /* <div className="user-info-fullname"></div> */
-}
-{
-    /* <div className="user-info-gender"></div> */
-}
-{
-    /* <div className="user-info-sexualpreferences"></div> */
-}
