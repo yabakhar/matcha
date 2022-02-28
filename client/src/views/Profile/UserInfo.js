@@ -4,9 +4,12 @@ const StyledHeader = styled.header`
     width: 100%;
     display: flex;
     flex-flow: row wrap;
-    align-items: center;
     gap: 2rem;
     padding: 3rem;
+    justify-content: center;
+    @media (max-width: 768px) {
+        padding: 0rem !important;
+    }
 `;
 
 const StyledPicture = styled.div`
@@ -20,6 +23,7 @@ const StyledPicture = styled.div`
     /* min-width: 22rem; */
     /* margin-right: 2rem; */
     padding: 0.5rem;
+    margin-right: 3rem;
     display: flex;
     /* align-items: center; */
     justify-content: center;
@@ -73,12 +77,8 @@ const StyledPicture = styled.div`
         }
     }
     @media (max-width: 768px) {
-        /* width: 15rem !important; */
-        /* height: 15rem !important; */
-    }
-    @media (max-width: 350px) {
-        /* width: 5rem !important; */
-        /* height: 5rem !important; */
+        padding: 0rem !important;
+        margin-right: 0rem !important;
     }
 `;
 

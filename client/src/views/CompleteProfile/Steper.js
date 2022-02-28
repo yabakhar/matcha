@@ -110,10 +110,7 @@ const Steper = () => {
                         gender: completeProfile.gender,
                         biography: completeProfile.biography,
                         birthdate: completeProfile.birthdate,
-                        llistOfInterests: [
-                            { tag: "bigola" },
-                            { tag: "bigola2" },
-                        ],
+                        llistOfInterests: ["bigola", "bigola2"],
                         gallery: completeProfile.gallery,
                         avatar: completeProfile.profilePicture,
                         id: token,

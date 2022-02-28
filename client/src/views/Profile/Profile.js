@@ -143,18 +143,19 @@ const images = [
 
 const StyledGelleryProfile = styled.div`
     width: 100%;
-    min-height: 80rem;
+    /* min-height: 40rem; */
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     gap: 10px;
-    align-items: center;
+    /* align-items: center; */
     .card {
-        border: 2px solid black;
+        /* border: 2px solid black; */
         z-index: 100;
-        flex: 1 1 30%;
+        flex: 0 0 30%;
+        border-radius: 20px;
         min-width: 300px;
-        height: 40rem;
+        height: 30rem;
         background-position: center;
         background-size: cover;
     }
@@ -162,7 +163,7 @@ const StyledGelleryProfile = styled.div`
 const StyledBody = styled(motion.div)`
     padding: 2rem;
     width: 100%;
-    height: 100%;
+    min-height: 60rem;
 `;
 
 const Gellery = () => {
@@ -183,7 +184,7 @@ const Gellery = () => {
 
 const StyledMap = styled.div`
     width: 100%;
-    height: 80rem;
+    min-height: 60rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -217,7 +218,7 @@ const Map = () => {
 
 const StyledHistory = styled.div`
     width: 100%;
-    height: 80rem;
+    min-height: 60rem;
     display: flex;
     justify-content: center;
     align-items: center;
