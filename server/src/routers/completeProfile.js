@@ -23,13 +23,8 @@ router.post("/completeProfile", auth, (req, res) => {
     listOfInterests?.forEach((element) => {
         tags.push([id, element]);
     });
-    if (tags.length == 0) {
-        return res.status(400).json({
-            status: 400,
-            message: "add tag please"
-        });
-    }
-    gallery.forEach((element) => {
+    
+    gallery?.forEach((element) => {
         elem = base64toimg.base64toimg(element.url)
         if (elem === "error")
         {
@@ -46,6 +41,12 @@ router.post("/completeProfile", auth, (req, res) => {
         return res.status(400).json({
             status: 400,
             message: "parsing image error"
+        });
+    }
+    if (tags.length == 0 || photos.length == 0) {
+        return res.status(400).json({
+            status: 400,
+            message: "add tag please"
         });
     }
     db.query(
