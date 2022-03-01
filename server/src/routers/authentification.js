@@ -25,8 +25,6 @@ router.post("/authentification", (req, res) => {
                         const id = result[0].id;
                         const lon = result[0].lon;
                         const lat = result[0].lat;
-                        const username = result[0].username;
-                        console.log(result[0]);
                         const accesstoken = jwt.sign(
                             { id, lon, lat, username },
                             process.env.ACCESS_TOKEN_SECRET,
