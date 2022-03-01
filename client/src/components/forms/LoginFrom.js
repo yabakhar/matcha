@@ -30,10 +30,9 @@ const Login = (props) => {
     const loginForm = () => {
         if (!loading) {
             dispatch(userLoginAction(values.username, values.password));
-        } else {
-            console.log("tsena ", values);
         }
     };
+
     const { handleChange, values, errors, handleSubmit } = useForm(loginForm);
     const [showPassword, setShowPassword] = useState(false);
     const handleMouseDownPassword = (event) => {
@@ -54,11 +53,10 @@ const Login = (props) => {
     };
 
     useEffect(() => {
-        console.log(user);
         if (user) {
             if (user.status === 200 && !user.complete)
                 navigate("/completeProfile");
-            else navigate("/profile");
+            else if (user.status === 200 && user.complete) navigate("/profile");
         }
     }, [userLogin]);
     useEffect(() => {

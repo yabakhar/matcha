@@ -8,6 +8,7 @@ import FirstStep from "./Steps/FirstStep";
 import SecondStep from "./Steps/SecondStep";
 import ThirdStep from "./Steps/ThirdStep";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function getSteps() {
@@ -73,32 +74,20 @@ const completeProfile = (state) => {
 
 const Steper = () => {
     const [activeStep, setActiveStep] = useState(0);
+    let navigate = useNavigate();
     const steps = getSteps();
     const state = useSelector((state) => state);
-    // const token = useSelector((state) => state.compl);
     const completeProfile = state.completeProfile;
-    const token = state?.userLogin?.user?.token;
-
-    // console.log(state);
+    const token = state?.userLogin?.user.token;
+    // useEffect(() => {
+    //     console.log(token);
+    // }, [state]);
     const handleNext = () => {
         if (activeStep === 1 && validateSecondStep(completeProfile)) {
             setActiveStep(activeStep + 1);
         } else if (activeStep === 0 && validateFirstStep(completeProfile))
             setActiveStep(activeStep + 1);
         else if (activeStep === 2) {
-            console.log({
-                location: completeProfile.location,
-                sexualPreferences: completeProfile.sexualPreferences,
-                firstName: completeProfile.firstName,
-                lastName: completeProfile.lastName,
-                gender: completeProfile.gender,
-                biography: completeProfile.biography,
-                birthdate: completeProfile.birthdate,
-                llistOfInterests: ["bigola", "bigola2"],
-                gallery: completeProfile.gallery,
-                avatar: completeProfile.profilePicture,
-                id: token,
-            });
             axios
                 .post(
                     "http://localhost:1337/user/completeProfile",
@@ -110,10 +99,10 @@ const Steper = () => {
                         gender: completeProfile.gender,
                         biography: completeProfile.biography,
                         birthdate: completeProfile.birthdate,
-                        llistOfInterests: ["bigola", "bigola2"],
+                        listOfInterests: [{ tag: "bigola" }],
                         gallery: completeProfile.gallery,
                         avatar: completeProfile.profilePicture,
-                        id: token,
+                        // id: token,
                     },
                     {
                         headers: {
@@ -121,10 +110,10 @@ const Steper = () => {
                         },
                     }
                 )
-                .then((res) => console.log(res))
+                .then((res) => navigate("/profile"))
                 .catch((err) => console.log(err.response));
             console.log("submit data");
-        } else console.log("woow");
+        }
     };
 
     const handleBack = () => {

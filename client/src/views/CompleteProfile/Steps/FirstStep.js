@@ -33,13 +33,17 @@ const FirstStep = () => {
         birthdate: birthdate,
         biography: biography,
         sexualPreferences: sexualPreferences,
+        listOfInterests: listOfInterests,
     } = state.completeProfile;
-    const token = state.userLogin.user?.token;
-
+    let token = state.userLogin.user.token;
+    // useEffect(() => {
+    //     // token = state.userLogin.user?.token;
+    //     console.log(state.userLogin?.token);
+    // }, [state]);
     const [value, setValue] = useState("");
     const [options, setOptions] = useState([]);
     const onSearch = (searchText) => {
-        // console.log(token);
+        console.log(token);
         if (token && searchText)
             axios
                 .post(
@@ -55,14 +59,14 @@ const FirstStep = () => {
                 )
                 .then((res) => {
                     console.log(res.data.result);
-                    setOptions([
-                        { value: "Burns Bay Road" },
-                        { value: "Downing Street" },
-                        { value: "Wall Street" },
-                    ]);
+                    setOptions(res.data.result);
                 });
     };
     const onSelect = (data) => {
+        dispatch({
+            type: CompleteProfileActionTypes.listOfInterests,
+            listOfInterests: [...listOfInterests, data],
+        });
         console.log("onSelect", data);
     };
     const onChange = (data) => {
@@ -163,8 +167,9 @@ const FirstStep = () => {
                         />
                     </div>
                     <div className="tags-and-biography__tags--container">
-                        <Chip label="Deletable" onDelete={handleDelete} />
-                        <Chip label="Deletable" onDelete={handleDelete} />
+                        {listOfInterests.map((item, index) => (
+                            <Chip label={item} onDelete={handleDelete} />
+                        ))}
                     </div>
                 </div>
                 <div className="tags-and-biography__biography">
