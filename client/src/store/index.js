@@ -10,6 +10,7 @@ const userFromLocalStorage = localStorage.getItem("user")
 const initialState = {
     userLogin: { user: userFromLocalStorage },
     userRegister: {},
+    userProfile: {},
 };
 
 export const store = createStore(

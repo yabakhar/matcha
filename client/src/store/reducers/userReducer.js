@@ -1,4 +1,8 @@
-import { loginActionTypes, registerActionTypes } from "../actions/actionTypes";
+import {
+    loginActionTypes,
+    registerActionTypes,
+    profileActionTypes,
+} from "../actions/actionTypes";
 export const userLoginReducer = (state = {}, action) => {
     switch (action.type) {
         case loginActionTypes.USER_LOGIN_REQUEST:
@@ -24,6 +28,18 @@ export const registerRducer = (state = {}, action) => {
             return { loading: false, error: action.payload };
         case registerActionTypes.USER_REGISTER_CLEAR:
             return { loading: false, error: null };
+        default:
+            return state;
+    }
+};
+export const profileRducer = (state = {}, action) => {
+    switch (action.type) {
+        case profileActionTypes.USER_PROFILE_REQUEST:
+            return { loading: true };
+        case profileActionTypes.USER_PROFILE_SUCCESS:
+            return { loading: false, profile: action.payload };
+        case profileActionTypes.USER_PROFILE_FAIL:
+            return { loading: false, error: action.payload };
         default:
             return state;
     }

@@ -1,4 +1,8 @@
-import { loginActionTypes, registerActionTypes } from "./actionTypes";
+import {
+    loginActionTypes,
+    registerActionTypes,
+    profileActionTypes,
+} from "./actionTypes";
 import axios from "axios";
 
 export const userLoginAction = (username, password) => async (dispatch) => {
@@ -42,3 +46,28 @@ export const userRegisterAction =
             });
         }
     };
+
+export const userProfileAction = (username, token) => async (dispatch) => {
+    try {
+        dispatch({ type: profileActionTypes.USER_PROFILE_REQUEST });
+        // console.log(username);
+        const data = await axios.get(
+            `http://localhost:1337/user/searshuser?username=robixi3662@sueshaw.com`,
+
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+        dispatch({
+            type: profileActionTypes.USER_PROFILE_SUCCESS,
+            payload: data.data.result[0],
+        });
+    } catch (error) {
+        dispatch({
+            type: profileActionTypes.USER_PROFILE_FAIL,
+            payload: error.response.data,
+        });
+    }
+};

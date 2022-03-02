@@ -14,7 +14,8 @@ import {
     StyledMap,
 } from "./Profile.style";
 import jwt_decode from "jwt-decode";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { userProfileAction } from "../../store/actions/userActions";
 
 const images = [
     {
@@ -75,12 +76,20 @@ const tabs = [
 ];
 
 const Profile = () => {
-    const state = useSelector((state) => state.userLogin.user.token);
+    const token = useSelector((state) => state.userLogin.user.token);
+    const [username, setUserName] = useState("");
+    const dispatch = useDispatch();
     useEffect(() => {
-        const decoded = jwt_decode(state);
-        console.log(state);
-        console.log(decoded);
-    }, [state]);
+        const decoded = jwt_decode(token);
+        // console.log(token);
+        setUserName(decoded.username);
+        // console.log(decoded.username);
+    }, []);
+    useEffect(() => {
+        // console.log(username);
+        dispatch(userProfileAction(username, token));
+    }, [username]);
+
     const [selectedTab, setSelectedTab] = useState(0);
     return (
         <>

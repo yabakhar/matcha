@@ -13,6 +13,14 @@ export const registerActionTypes = {
     //   USER_LOGOUT: "USER_LOGOUT",
 };
 
+export const profileActionTypes = {
+    USER_PROFILE_REQUEST: "USER_PROFILE_REQUEST",
+    USER_PROFILE_SUCCESS: "USER_PROFILE_SUCCESS",
+    USER_PROFILE_CLEAR: "USER_PROFILE_CLEAR",
+    USER_PROFILE_FAIL: "USER_PROFILE_FAIL",
+    //   USER_LOGOUT: "USER_LOGOUT",
+};
+
 export const CompleteProfileActionTypes = {
     firstName: "UPDATE_FIRST_NAME",
     lastName: "UPDATE_LAST_NAME",
