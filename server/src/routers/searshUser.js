@@ -7,7 +7,7 @@ router.get("/searshuser", auth, async (req, res) => {
         if (username)
         {
             db.query('SELECT users.username,users.first_name,users.last_name,users.gender,users.orientation,users.username,users.biography,users.avatar,users.rating,users.lat,users.lon,users.birthdate,tags.tag,photos.photo FROM users \
-            LEFT JOIN tags ON users.id = tags.iduser LEFT JOIN photos ON users.id = photos.iduser WHERE users.username=?', [username], function (err, result,) {
+            LEFT JOIN tags ON users.id = tags.iduser INNER JOIN photos ON users.id = photos.iduser WHERE users.username=?', [username], function (err, result,) {
             try {
                 if (result.length > 0)
                 {
@@ -15,7 +15,7 @@ router.get("/searshuser", auth, async (req, res) => {
                     .json(
                         {
                             status: 200,
-                            result: result,
+                            result: result[0],
                         }
                     );
                 }
