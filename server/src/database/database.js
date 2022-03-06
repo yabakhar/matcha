@@ -8,7 +8,7 @@ const db = mysql.createConnection({
 });
 db.connect((err) => {
     if (err) {
-        console.log(`err ${err}`);
-    } else console.log("ana mconnece");
+        console.error(`err ${err}`);
+    } else console.info("DB is Connected");
 });
 module.exports = db;

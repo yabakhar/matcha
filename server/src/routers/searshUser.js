@@ -6,16 +6,35 @@ router.get("/searshuser", auth, async (req, res) => {
     const {username} = req.query
         if (username)
         {
-            db.query('SELECT users.username,users.first_name,users.last_name,users.gender,users.orientation,users.username,users.biography,users.avatar,users.rating,users.lat,users.lon,users.birthdate,tags.tag,photos.photo FROM users \
-            LEFT JOIN tags ON users.id = tags.iduser INNER JOIN photos ON users.id = photos.iduser WHERE users.username=?', [username], function (err, result,) {
+            db.query(`(SELECT username,first_name,last_name,gender,orientation,username,biography,avatar,rating,lat,lon,birthdate FROM users WHERE username=?) ; \
+            (SELECT tag from tags WHERE iduser=(SELECT id from users WHERE username=?)) ; (SELECT photo from photos WHERE iduser=(SELECT id from users WHERE username=?))`, [username,username,username], 
+            function (err, result,) {
             try {
                 if (result.length > 0)
                 {
+                    let newResult = {};
+                    result.forEach(el => {
+                        el.forEach(el1 => {
+                            Object.entries(el1).map(subElement => {
+                                console.log(subElement);
+                                if(newResult[subElement[0]]) {
+                                    newResult[subElement[0]].push(subElement[1])
+                                }
+                                else if (subElement[0] === 'photo') {
+                                    newResult[subElement[0]] = [subElement[1]]
+                                } 
+                                else {
+                                    newResult[subElement[0]] = subElement[1]
+                                }
+                        })
+                        })
+                    });
+                    console.log(newResult);
                     return res.status(200)
                     .json(
                         {
                             status: 200,
-                            result: result[0],
+                            result: newResult,
                         }
                     );
                 }
@@ -33,7 +52,7 @@ router.get("/searshuser", auth, async (req, res) => {
                 .json(
                     {
                         status: 400,
-                        message: `Database error ${err}`,
+                        message: `Database error ${error}`,
                     }
                 )
             }
