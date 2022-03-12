@@ -79,9 +79,6 @@ const Steper = () => {
     const state = useSelector((state) => state);
     const completeProfile = state.completeProfile;
     const token = state?.userLogin?.user.token;
-    // useEffect(() => {
-    //     console.log(token);
-    // }, [state]);
     const handleNext = () => {
         if (activeStep === 1 && validateSecondStep(completeProfile)) {
             setActiveStep(activeStep + 1);
