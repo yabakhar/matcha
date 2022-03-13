@@ -50,9 +50,10 @@ export const userRegisterAction =
 export const userProfileAction = (username, token) => async (dispatch) => {
     try {
         dispatch({ type: profileActionTypes.USER_PROFILE_REQUEST });
-        // console.log(username);
+        console.log(username);
+
         const data = await axios.get(
-            `http://localhost:1337/user/searshuser?username=robixi3662@sueshaw.com`,
+            `http://localhost:1337/user/searshuser?username=${username}`,
 
             {
                 headers: {
@@ -60,9 +61,10 @@ export const userProfileAction = (username, token) => async (dispatch) => {
                 },
             }
         );
+        // console.log(data.data.result);
         dispatch({
             type: profileActionTypes.USER_PROFILE_SUCCESS,
-            payload: data.data.result[0],
+            payload: data.data.result,
         });
     } catch (error) {
         dispatch({

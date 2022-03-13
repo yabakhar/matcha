@@ -135,7 +135,7 @@ const StyledInfo = styled.div`
         /* height: 5rem !important; */
     }
 `;
-const UserInfo = () => {
+const UserInfo = ({ user }) => {
     return (
         <StyledHeader>
             <StyledPicture>
@@ -146,6 +146,7 @@ const UserInfo = () => {
                         className="background"
                         style={{
                             backgroundImage: `url("https://images.unsplash.com/photo-1516522973472-f009f23bba59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")`,
+                            backgroundImage: `url("http://localhost:1337/${user.avatar}")`,
                         }}
                     />
                 </div>
@@ -169,15 +170,17 @@ const UserInfo = () => {
                 </div>
                 <div className="item">
                     <div className="label">User Name</div>
-                    <div className="value">Farwila</div>
+                    <div className="value">{user.username}</div>
                 </div>
                 <div className="item">
                     <div className="label">Full Name</div>
-                    <div className="value">Bigola Lfarwila</div>
+                    <div className="value">
+                        {user.first_name} {user.last_name}
+                    </div>
                 </div>
                 <div className="item">
                     <div className="label">Gender</div>
-                    <div className="value">Male</div>
+                    <div className="value">{user.gender}</div>
                 </div>
                 <div className="item">
                     <div className="label">Age</div>
@@ -185,7 +188,7 @@ const UserInfo = () => {
                 </div>
                 <div className="item">
                     <div className="label">Sexual Preferences</div>
-                    <div className="value">Female</div>
+                    <div className="value">{user.orientation}</div>
                 </div>
             </StyledInfo>
         </StyledHeader>

@@ -51,12 +51,12 @@ const Gellery = () => {
     );
 };
 
-const Map = () => {
+const Map = ({ user }) => {
     return (
         <StyledMap>
             <MapContainer
                 className="map-container"
-                center={{ lat: 51.505, lng: -0.09 }}
+                center={{ lat: user.lat, lng: user.lon }}
                 zoom={13}
             >
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -69,101 +69,109 @@ const Map = () => {
 const History = () => {
     return <StyledHistory>History</StyledHistory>;
 };
-const tabs = [
-    { label: "Map", component: <Map /> },
-    { label: "Gallery", component: <Gellery /> },
-    { label: "History", component: <History /> },
-];
 
 const Profile = () => {
     const token = useSelector((state) => state.userLogin.user.token);
     const [username, setUserName] = useState("");
+    const [result, setResult] = useState(null);
     const dispatch = useDispatch();
     useEffect(() => {
         const decoded = jwt_decode(token);
-        // console.log(token);
         setUserName(decoded.username);
-        // console.log(decoded.username);
     }, []);
     useEffect(() => {
+        console.log(username);
+        if (username) dispatch(userProfileAction(username, token));
         // console.log(username);
-        dispatch(userProfileAction(username, token));
     }, [username]);
+    const user = useSelector((state) => state.userProfile.profile);
+    useEffect(() => {
+        console.log(user);
+        if (user) {
+            setResult(user);
+        }
+        console.log(username);
+        // if (username) dispatch(userProfileAction(username, token));
+    }, [user]);
 
+    const tabs = [
+        { label: "Map", component: <Map user={result} /> },
+        { label: "Gallery", component: <Gellery user={result} /> },
+        { label: "History", component: <History user={result} /> },
+    ];
     const [selectedTab, setSelectedTab] = useState(0);
     return (
         <>
             <NavBar />
-            <StyledProfile>
-                <UserInfo />
-                <StyledBioAndTags>
-                    <div className="container">
-                        <div className="container-header">
-                            List Of Interests
+            {result ? (
+                <StyledProfile>
+                    <UserInfo user={result} />
+                    <StyledBioAndTags>
+                        <div className="container">
+                            <div className="container-header">
+                                List Of Interests
+                            </div>
+                            <div className="container-content">
+                                <div className="tag">bigola</div>
+                                <div className="tag">basla</div>
+                                <div className="tag">btata</div>
+                                <div className="tag">3jina</div>
+                                <div className="tag">kan yamakan</div>
+                            </div>
                         </div>
-                        <div className="container-content">
-                            <div className="tag">bigola</div>
-                            <div className="tag">basla</div>
-                            <div className="tag">btata</div>
-                            <div className="tag">3jina</div>
-                            <div className="tag">kan yamakan</div>
+                        <div className="container">
+                            <div className="container-header">Biography</div>
+                            <div className="container-content">
+                                {result.biography}
+                            </div>
                         </div>
-                    </div>
-                    <div className="container">
-                        <div className="container-header">Biography</div>
-                        <div className="container-content">
-                            Le Lorem Ipsum est simplement du faux texte employé
-                            dans la composition et la mise en page avant
-                            impression. Le Lorem Ipsum est le faux texte
-                            standard de l'imprimerie depuis les années 1500,
-                            quand un imprimeur anonyme assembla ensemble des
-                            morceaux de texte pour réaliser un livre spécimen de
-                        </div>
-                    </div>
-                </StyledBioAndTags>
-                <StyledFooter>
+                    </StyledBioAndTags>
                     <StyledFooter>
-                        <div className="head">
-                            {/* <div className="selected"></div> */}
-                            {tabs.map((item, index) => (
-                                <div
-                                    onClick={() => {
-                                        setSelectedTab(index);
-                                        console.log(item);
-                                    }}
-                                    key={index}
-                                    className={
-                                        index === selectedTab
-                                            ? "label selected"
-                                            : "label"
-                                    }
-                                >
-                                    {item.label}
-                                    {index === selectedTab ? (
-                                        <motion.div
-                                            className="underline"
-                                            layoutId="underline"
-                                        />
-                                    ) : null}
-                                </div>
-                            ))}
-                        </div>
-                        <div className="body">
-                            <AnimatePresence exitBeforeEnter>
-                                <StyledBody
-                                    key={selectedTab}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    exit={{ opacity: 0, y: -20 }}
-                                    transition={{ duration: 0.15 }}
-                                >
-                                    {tabs[selectedTab].component}
-                                </StyledBody>
-                            </AnimatePresence>
-                        </div>
+                        <StyledFooter>
+                            <div className="head">
+                                {/* <div className="selected"></div> */}
+                                {tabs.map((item, index) => (
+                                    <div
+                                        onClick={() => {
+                                            setSelectedTab(index);
+                                            console.log(item);
+                                        }}
+                                        key={index}
+                                        className={
+                                            index === selectedTab
+                                                ? "label selected"
+                                                : "label"
+                                        }
+                                    >
+                                        {item.label}
+                                        {index === selectedTab ? (
+                                            <motion.div
+                                                className="underline"
+                                                layoutId="underline"
+                                            />
+                                        ) : null}
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="body">
+                                <AnimatePresence exitBeforeEnter>
+                                    <StyledBody
+                                        key={selectedTab}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.15 }}
+                                    >
+                                        {tabs[selectedTab].component}
+                                    </StyledBody>
+                                </AnimatePresence>
+                            </div>
+                        </StyledFooter>
                     </StyledFooter>
-                </StyledFooter>
-            </StyledProfile>
+                </StyledProfile>
+            ) : (
+                ""
+            )}
         </>
     );
 };
