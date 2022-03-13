@@ -8,7 +8,7 @@ router.get("/searshuser", auth, async (req, res) => {
         {
             db.query(`(SELECT username,first_name,last_name,gender,orientation,username,biography,avatar,rating,lat,lon,birthdate FROM users WHERE username=?) ; \
             (SELECT tag from tags WHERE iduser=(SELECT id from users WHERE username=?)) ; (SELECT photo from photos WHERE iduser=(SELECT id from users WHERE username=?))`, [username,username,username], 
-            function (err, result,) {
+            function (err, result) {
             try {
                 if (result.length > 0)
                 {
